@@ -1,0 +1,193 @@
+import { TrustPoint, QuickTeaser } from '../types';
+
+export const BRAND_DETAILS = {
+  name: 'Prime Funds Solutions Pvt. Ltd.',
+  tagline: 'All About Loans',
+  subTagline: 'Indian loans & insurance facilitation consultancy',
+  contactPerson: 'Saikiran.V',
+  phone: '+91 9177886354',
+  rawPhone: '919177886354',
+  email: 'contact@primefundssolutions.com',
+  address: 'Prime Towers, Financial District, Gachibowli, Hyderabad, Telangana 500032, India',
+  whatsappUrl: (text: string) => `https://wa.me/919177886354?text=${encodeURIComponent(text)}`,
+  callUrl: 'tel:+919177886354',
+  emailUrl: 'mailto:contact@primefundssolutions.com'
+};
+
+export const HOME_TRUST_POINTS: TrustPoint[] = [
+  {
+    id: 'tp-1',
+    title: '40+ Lending Partners',
+    description: 'We connect you directly with premier Indian banks and reputed NBFCs.',
+    iconName: 'Building2'
+  },
+  {
+    id: 'tp-2',
+    title: 'Transparent Advisory',
+    description: 'Our loan experts provide unbiased comparisons with zero hidden consultation charges.',
+    iconName: 'BadgeCheck'
+  },
+  {
+    id: 'tp-3',
+    title: 'Rapid Sanction Cycles',
+    description: 'Experience swift document clearance and expedited fund disbursements directly to your account.',
+    iconName: 'Zap'
+  },
+  {
+    id: 'tp-4',
+    title: 'End-to-End Assistance',
+    description: 'We handle your complete paperwork from initial application up to final disbursement.',
+    iconName: 'FileCheck2'
+  }
+];
+
+export const HOME_TEASERS: QuickTeaser[] = [
+  {
+    id: 'about',
+    title: 'About Prime Funds',
+    description: 'Discover our mission to provide hassle-free financial solutions across India.',
+    buttonText: 'Read Our Story',
+    imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
+    iconName: 'Building'
+  },
+  {
+    id: 'insurances',
+    title: 'Insurance Solutions',
+    description: 'Safeguard your family and valuable assets with our complete protection plans.',
+    buttonText: 'View Insurance Plans',
+    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
+    iconName: 'Shield'
+  },
+  {
+    id: 'calculator',
+    title: 'Loan EMI Calculator',
+    description: 'Plan your monthly repayments and assess your maximum borrowing eligibility online.',
+    buttonText: 'Calculate EMI Now',
+    imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80',
+    iconName: 'Calculator'
+  },
+  {
+    id: 'contact',
+    title: 'Get In Touch',
+    description: 'Speak directly with our loan advisors to receive immediate personalized assistance.',
+    buttonText: 'Contact Our Team',
+    imageUrl: 'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=600&q=80',
+    iconName: 'PhoneCall'
+  }
+];
+
+export const ABOUT_STATS = [
+  { prefix: '₹', numericValue: 500, suffix: '+ Cr', value: '₹500+ Cr', label: 'Total Loans Facilitated' },
+  { prefix: '', numericValue: 15000, suffix: '+', value: '15,000+', label: 'Satisfied Retail & MSME Clients' },
+  { prefix: '', numericValue: 40, suffix: '+', value: '40+', label: 'Empaneled Banks & NBFCs' },
+  { prefix: '', numericValue: 99, suffix: '%', value: '99%', label: 'Customer Recommendation Rate' }
+];
+
+export const WHY_CHOOSE_US = [
+  {
+    title: 'Unbiased Multi-Bank Options',
+    description: 'We compare offers across 40+ leading financial institutions to secure the lowest rates for you.',
+    iconName: 'Scale'
+  },
+  {
+    title: 'Dedicated Financial Facilitator',
+    description: 'Your assigned loan specialist manages every document and coordinate directly with bank underwriters.',
+    iconName: 'UserCheck'
+  },
+  {
+    title: 'Zero Hidden Upfront Costs',
+    description: 'We maintain complete transparency in our facilitation process with no surprise consulting charges.',
+    iconName: 'Lock'
+  },
+  {
+    title: 'Comprehensive Portfolio Coverage',
+    description: 'From personal loans to commercial mortgage and life insurance, we cover all your financial requirements.',
+    iconName: 'Layers'
+  }
+];
+
+export const PRIVACY_POLICY_SECTIONS = [
+  {
+    title: '1. Introduction',
+    content: 'Prime Funds Solutions Pvt. Ltd. ("we", "our", or "us") respects your personal privacy. This Privacy Policy outlines how we collect, store, utilize, and protect your information when you interact with our website or utilize our loans and insurance facilitation advisory services in India.'
+  },
+  {
+    title: '2. Information We Collect',
+    content: 'We collect personal identification details such as your full name, mobile phone number, email address, residential address, employment information, estimated monthly income, and specific loan or insurance preferences submitted voluntarily through our inquiry forms or customer communication channels.'
+  },
+  {
+    title: '3. How We Use Your Information',
+    content: 'Your information is used strictly to evaluate your borrowing eligibility, calculate accurate repayment quotes, connect you with suitable banking institutions or insurance providers, communicate updates regarding your application status, and deliver professional financial advisory support.'
+  },
+  {
+    title: '4. Data Sharing & Third-Party Lenders',
+    content: 'We share your submitted financial profile exclusively with authorized partner banks, RBI-registered Non-Banking Financial Companies (NBFCs), and IRDAI-licensed insurance companies for the sole purpose of processing your loan or insurance application. We never sell, rent, or trade your personal data to external telemarketing firms.'
+  },
+  {
+    title: '5. Data Security Measures',
+    content: 'We implement industry-standard technical safeguards, encrypted communication channels, and strict internal administrative protocols to prevent unauthorized access, alteration, disclosure, or accidental destruction of your confidential information.'
+  },
+  {
+    title: '6. Your Rights & Preferences',
+    content: 'You retain the right to review, update, or request the deletion of your personal contact records stored with us at any time. You may also opt out of promotional communications by notifying our compliance officer.'
+  },
+  {
+    title: '7. Cookies & Tracking Technologies',
+    content: 'Our website uses standard essential cookies and analytics tools to enhance site navigation, monitor page responsiveness, and optimize user experience. You can manage your cookie preferences through your individual browser settings.'
+  },
+  {
+    title: '8. External Third-Party Links',
+    content: 'Our website may contain references or hyperlinks to official partner bank portals and government insurance registries. We encourage you to review their independent privacy terms, as we do not control third-party digital properties.'
+  },
+  {
+    title: '9. Updates to this Policy',
+    content: 'We periodically update this Privacy Policy to reflect modifications in Indian regulatory guidelines or our internal facilitation practices. Continued use of our website indicates acceptance of the revised privacy framework.'
+  },
+  {
+    title: '10. Contact for Privacy Inquiries',
+    content: 'If you have any questions, grievances, or requests regarding your personal data handling, please contact our Data Representative Saikiran.V at +91 9177886354 or via email at contact@primefundssolutions.com.'
+  }
+];
+
+export const TERMS_CONDITIONS_SECTIONS = [
+  {
+    title: '1. Acceptance of Terms',
+    content: 'By accessing, browsing, or utilizing the web platform of Prime Funds Solutions Pvt. Ltd., you acknowledge that you have read, understood, and agreed to be legally bound by these Terms and Conditions and our Privacy Policy.'
+  },
+  {
+    title: '2. Nature of Advisory Service',
+    content: 'Prime Funds Solutions Pvt. Ltd. operates strictly as an independent facilitation and advisory consultant connecting customers with third-party lenders and insurers. We are not a direct bank, NBFC, deposit-taking institution, or underwriting insurer.'
+  },
+  {
+    title: '3. User Responsibilities & Accuracy',
+    content: 'You agree to provide true, accurate, current, and complete details regarding your identity, employment status, credit profile, and financial records when submitting inquiries or loan applications through our team.'
+  },
+  {
+    title: '4. No Guarantee of Final Approval',
+    content: 'All loan approvals, sanction limits, interest rates, tenure allowances, and insurance policy issuances are determined solely at the independent discretion of the respective partner banks, NBFCs, and insurance underwriters based on their underwriting criteria.'
+  },
+  {
+    title: '5. Fee Disclosures & Transparency',
+    content: 'Prime Funds Solutions Pvt. Ltd. clearly discloses all relevant consultation arrangements. Standard processing fees, documentation charges, and statutory stamp duties charged by partner lending institutions are payable directly to the respective institutions.'
+  },
+  {
+    title: '6. Intellectual Property Rights',
+    content: 'All brand names, trademarks, logos, texts, graphics, user interface designs, and proprietary calculators hosted on this website are the intellectual property of Prime Funds Solutions Pvt. Ltd. and are protected under Indian intellectual property laws.'
+  },
+  {
+    title: '7. Limitation of Liability',
+    content: 'Prime Funds Solutions Pvt. Ltd. shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from loan rejections by partner banks, processing delays, or changes in lending policies made by third-party financial institutions.'
+  },
+  {
+    title: '8. Governing Law & Jurisdiction',
+    content: 'These terms and conditions are governed by and construed in accordance with the laws of the Republic of India. Any legal disputes arising out of these terms shall be subject to the exclusive jurisdiction of the courts in Hyderabad, Telangana.'
+  },
+  {
+    title: '9. Amendments to Terms',
+    content: 'We reserve the right to revise or update these terms at our discretion without prior notice. Your continued utilization of our services after such modifications constitutes your express agreement to the updated terms.'
+  },
+  {
+    title: '10. Contact for Legal Grievances',
+    content: 'For questions, official notices, or legal inquiries concerning these Terms and Conditions, please contact our corporate liaison Saikiran.V at +91 9177886354 or via email at contact@primefundssolutions.com.'
+  }
+];

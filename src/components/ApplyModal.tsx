@@ -1,0 +1,224 @@
+import React, { useState } from 'react';
+import { X, CheckCircle2, Shield, ArrowRight } from 'lucide-react';
+import { WhatsAppIcon } from './BrandIcons';
+import { BRAND_DETAILS } from '../data/contentData';
+
+interface ApplyModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  defaultCategory?: string;
+  defaultService?: string;
+}
+
+export const ApplyModal: React.FC<ApplyModalProps> = ({
+  isOpen,
+  onClose,
+  defaultService = 'Personal Loan'
+}) => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    phone: '',
+    email: '',
+    serviceType: defaultService,
+    loanAmount: '₹5,00,000',
+    employmentType: 'Salaried Professional',
+    monthlyIncome: '₹50,000',
+    city: 'Hyderabad'
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const openWhatsAppDirect = () => {
+    const text = `Hi Saikiran, I want to apply for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.fullName}, Phone: ${formData.phone}, Monthly Income: ${formData.monthlyIncome}, City: ${formData.city}.`;
+    window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl bg-white dark:bg-[#151E32] rounded-2xl shadow-2xl border border-[#E5E9F2] dark:border-[#2A3550] overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E9F2] dark:border-[#2A3550] bg-slate-50 dark:bg-[#0F1626]">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-[#F5822C]/10 dark:bg-[#F5822C]/20 flex items-center justify-center text-[#F5822C]">
+              <Shield className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-[#12245C] dark:text-white leading-tight">
+                Quick Loan & Insurance Application
+              </h3>
+              <p className="text-xs text-[#5B6377] dark:text-[#9BA3B7]">
+                Connect with our senior financial advisors within 30 minutes.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            aria-label="Close modal"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 max-h-[80vh] overflow-y-auto">
+          {submitted ? (
+            <div className="text-center py-8 space-y-4">
+              <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/60 rounded-full flex items-center justify-center mx-auto text-emerald-600 dark:text-emerald-400">
+                <CheckCircle2 className="w-10 h-10" />
+              </div>
+              <h4 className="text-xl font-extrabold text-[#12245C] dark:text-white">
+                Application Received Successfully!
+              </h4>
+              <p className="text-sm text-[#5B6377] dark:text-[#9BA3B7] max-w-md mx-auto leading-relaxed">
+                Thank you, <strong>{formData.fullName}</strong>. Our advisor Saikiran.V will review your {formData.serviceType} requirements and contact you at {formData.phone} shortly.
+              </p>
+              <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  onClick={openWhatsAppDirect}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm transition-all shadow-md active:scale-95"
+                >
+                  <WhatsAppIcon size={18} className="w-4 h-4" />
+                  Chat Directly on WhatsApp
+                </button>
+                <button
+                  onClick={() => {
+                    setSubmitted(false);
+                    onClose();
+                  }}
+                  className="px-5 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Your Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Ramesh Kumar"
+                    value={formData.fullName}
+                    onChange={e => setFormData({ ...formData, fullName: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Mobile Number *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="e.g. +91 98765 43210"
+                    value={formData.phone}
+                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Required Service / Product *
+                  </label>
+                  <select
+                    value={formData.serviceType}
+                    onChange={e => setFormData({ ...formData, serviceType: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+                  >
+                    <option value="Personal Loan">Personal Loan</option>
+                    <option value="Home Loan">Home Loan</option>
+                    <option value="Business Loan">Business Loan</option>
+                    <option value="Mortgage Loan">Mortgage Loan</option>
+                    <option value="Gold Loan">Gold Loan</option>
+                    <option value="Vehicle Loan">Vehicle Loan</option>
+                    <option value="Educational Loan">Educational Loan</option>
+                    <option value="Agriculture Loan">Agriculture Loan</option>
+                    <option value="Secured & Unsecured Loan">Secured & Unsecured Loan</option>
+                    <option value="Micro Finance">Micro Finance</option>
+                    <option value="Balance Transfer & LAP">Balance Transfer & LAP</option>
+                    <option value="Health Insurance">Health Insurance (₹5L-5Cr)</option>
+                    <option value="Life / Term Insurance">Life / Term Insurance</option>
+                    <option value="Vehicle / General Insurance">Vehicle / General Insurance</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Estimated Required Amount
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. ₹10,00,000"
+                    value={formData.loanAmount}
+                    onChange={e => setFormData({ ...formData, loanAmount: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Employment Category
+                  </label>
+                  <select
+                    value={formData.employmentType}
+                    onChange={e => setFormData({ ...formData, employmentType: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+                  >
+                    <option value="Salaried Professional">Salaried Professional</option>
+                    <option value="Self Employed / Business Owner">Self Employed / Business Owner</option>
+                    <option value="Doctor / Professional">Doctor / Professional</option>
+                    <option value="Agriculturist / Farmer">Agriculturist / Farmer</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Monthly Net Income
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. ₹65,000"
+                    value={formData.monthlyIncome}
+                    onChange={e => setFormData({ ...formData, monthlyIncome: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  className="w-full py-3.5 px-6 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/25 transition-all flex items-center justify-center gap-2 active:scale-98"
+                >
+                  Submit Inquiry Application
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="text-center pt-2">
+                <p className="text-[11px] text-[#5B6377] dark:text-[#9BA3B7]">
+                  Your data is protected. By submitting, you agree to receive consultation from Prime Funds Solutions.
+                </p>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
