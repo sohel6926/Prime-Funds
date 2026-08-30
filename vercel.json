@@ -59,7 +59,7 @@
   ],
   "headers": [
     {
-      "source": "/og-image.jpg",
+      "source": "/(og-image.png|og-image.jpg)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "source": "/favicon.png",
+      "source": "/(favicon.png|favicon.ico)",
       "headers": [
         {
           "key": "Cache-Control",
