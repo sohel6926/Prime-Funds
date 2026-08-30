@@ -256,12 +256,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     ></textarea>
                   </div>
 
+                  {/* Fee Breakdown Box */}
+                  <div className="bg-white/90 dark:bg-[#0B1220]/90 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#2A3550] space-y-2.5 shadow-sm">
+                    <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                      <span>Professional Fee</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">₹199</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                      <span>Processing Fee</span>
+                      <span className="font-bold text-emerald-600 dark:text-emerald-400">FREE</span>
+                    </div>
+                    <div className="border-t border-slate-200 dark:border-slate-700/60 pt-2.5 flex justify-between items-center">
+                      <span className="text-sm font-bold text-[#12245C] dark:text-white">Total Amount</span>
+                      <span className="text-base sm:text-lg font-extrabold text-[#F5822C]">₹199</span>
+                    </div>
+                  </div>
+
                   <button
                     type="submit"
-                    className="w-full py-3.5 px-6 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/25 transition-all flex items-center justify-center gap-2 active:scale-98"
+                    className="w-full py-3.5 px-6 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/25 transition-all flex items-center justify-center gap-2 active:scale-98 cursor-pointer"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Send Message to Advisor</span>
+                    <span>Secure Payment & Send Inquiry</span>
+                    <ShieldCheck className="w-4 h-4" />
                   </button>
                 </form>
               )}

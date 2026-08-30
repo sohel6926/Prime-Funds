@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, Shield, ArrowRight } from 'lucide-react';
+import { X, CheckCircle2, Shield, ArrowRight, ShieldCheck } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { BRAND_DETAILS } from '../data/contentData';
 
@@ -22,7 +22,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
     serviceType: defaultService,
     loanAmount: '₹5,00,000',
     employmentType: 'Salaried Professional',
-    monthlyIncome: '₹50,000',
+    message: '',
     city: 'Hyderabad'
   });
 
@@ -36,7 +36,10 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
   };
 
   const openWhatsAppDirect = () => {
-    const text = `Hi Saikiran, I want to apply for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.fullName}, Phone: ${formData.phone}, Monthly Income: ${formData.monthlyIncome}, City: ${formData.city}.`;
+    let text = `Hi Saikiran, I want to apply for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.fullName}, Phone: ${formData.phone}`;
+    if (formData.email) text += `, Email: ${formData.email}`;
+    if (formData.employmentType) text += `, Employment: ${formData.employmentType}`;
+    if (formData.message) text += `, Message: ${formData.message}`;
     window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
   };
 
@@ -133,6 +136,18 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="e.g. ramesh@example.com"
+                    value={formData.email}
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Required Service / Product *
                   </label>
                   <select
@@ -156,6 +171,9 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                     <option value="Vehicle / General Insurance">Vehicle / General Insurance</option>
                   </select>
                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Estimated Required Amount
@@ -168,9 +186,6 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                     className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
                   />
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Employment Category
@@ -186,27 +201,44 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                     <option value="Agriculturist / Farmer">Agriculturist / Farmer</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    Monthly Net Income
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. ₹65,000"
-                    value={formData.monthlyIncome}
-                    onChange={e => setFormData({ ...formData, monthlyIncome: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
-                  />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Message / Requirements
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Share any specific requirements, preferred banks, or notes..."
+                  value={formData.message}
+                  onChange={e => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C] resize-none"
+                />
+              </div>
+
+              {/* Fee Breakdown Box */}
+              <div className="bg-slate-50 dark:bg-[#0B1220]/80 rounded-2xl p-4 border border-[#E5E9F2] dark:border-[#2A3550] space-y-2.5">
+                <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                  <span>Professional Fee</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">₹199</span>
+                </div>
+                <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                  <span>Processing Fee</span>
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400">FREE</span>
+                </div>
+                <div className="border-t border-slate-200 dark:border-slate-700/60 pt-2.5 flex justify-between items-center">
+                  <span className="text-sm font-bold text-[#12245C] dark:text-white">Total Amount</span>
+                  <span className="text-base sm:text-lg font-extrabold text-[#F5822C]">₹199</span>
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-1">
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/25 transition-all flex items-center justify-center gap-2 active:scale-98"
+                  className="w-full py-3.5 px-6 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/25 transition-all flex items-center justify-center gap-2 active:scale-98 cursor-pointer"
                 >
-                  Submit Inquiry Application
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Secure Payment & Send Inquiry</span>
+                  <ShieldCheck className="w-4 h-4" />
                 </button>
               </div>
 
