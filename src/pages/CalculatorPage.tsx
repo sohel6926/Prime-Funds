@@ -224,7 +224,10 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate, onOp
       </section>
 
       {/* 2. Main EMI Calculator Section */}
-      <section className="py-14 bg-white dark:bg-[#0B1220] relative overflow-hidden">
+      <section
+        id="emi-calculator"
+        className="py-14 bg-white dark:bg-[#0B1220] relative overflow-hidden scroll-mt-16 sm:scroll-mt-20"
+      >
         <CalculatorBackgroundArt />
         <DotGridPattern size={1.5} gap={32} maskRadial />
         <GlowAura position="top-right" variant="orange" opacity="opacity-30 dark:opacity-20" />

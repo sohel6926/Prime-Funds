@@ -28,8 +28,8 @@ import {
 } from 'lucide-react';
 
 interface HomePageProps {
-  onNavigate: (page: PageId) => void;
-  onOpenApply: (service?: string) => void;
+  onNavigate: (page: PageId, targetId?: string) => void;
+  onOpenApply: (serviceName?: string) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply }) => {
@@ -139,8 +139,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply }) =
                 </button>
 
                 <button
-                  onClick={() => onNavigate('calculator')}
-                  className="px-6 py-3.5 rounded-xl border-2 border-[#12245C] dark:border-[#4FC3E0] text-[#12245C] dark:text-[#4FC3E0] hover:bg-[#12245C] hover:text-white dark:hover:bg-[#4FC3E0] dark:hover:text-[#0B1220] font-bold text-sm transition-all flex items-center justify-center gap-2 bg-white/60 dark:bg-transparent backdrop-blur-sm"
+                  onClick={() => onNavigate('calculator', 'emi-calculator')}
+                  className="px-6 py-3.5 rounded-xl border-2 border-[#12245C] dark:border-[#4FC3E0] text-[#12245C] dark:text-[#4FC3E0] hover:bg-[#12245C] hover:text-white dark:hover:bg-[#4FC3E0] dark:hover:text-[#0B1220] font-bold text-sm transition-all flex items-center justify-center gap-2 bg-white/60 dark:bg-transparent backdrop-blur-sm cursor-pointer"
                 >
                   <Calculator className="w-4 h-4" />
                   <span>Calculate EMI</span>
@@ -363,8 +363,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply }) =
                       </p>
                     </div>
                     <button
-                      onClick={() => onNavigate(teaser.id)}
-                      className="w-full py-2 px-3 rounded-lg border border-[#12245C]/20 dark:border-slate-700 text-[#12245C] dark:text-[#4FC3E0] hover:bg-[#12245C] hover:text-white dark:hover:bg-[#4FC3E0] dark:hover:text-[#0B1220] text-xs font-bold transition-all flex items-center justify-center gap-1.5 md:group-hover:border-[#3FB6D3]"
+                      onClick={() => onNavigate(teaser.id, teaser.id === 'calculator' ? 'emi-calculator' : undefined)}
+                      className="w-full py-2 px-3 rounded-lg border border-[#12245C]/20 dark:border-slate-700 text-[#12245C] dark:text-[#4FC3E0] hover:bg-[#12245C] hover:text-white dark:hover:bg-[#4FC3E0] dark:hover:text-[#0B1220] text-xs font-bold transition-all flex items-center justify-center gap-1.5 md:group-hover:border-[#3FB6D3] cursor-pointer"
                     >
                       <span>{teaser.buttonText}</span>
                       <ArrowRight className="w-3 h-3" />
