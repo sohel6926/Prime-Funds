@@ -586,3 +586,148 @@ export const ContactBackgroundArt: React.FC<{
     </div>
   );
 };
+/**
+ * Real Estate Section Background Art:
+ * Property-themed illustrations — building outlines, house blueprints, plot grids, keys, and floor plan motifs
+ */
+export const RealEstateBackgroundArt: React.FC<{
+  className?: string;
+  variant?: 'hero' | 'cards' | 'cta';
+}> = ({ className = '', variant = 'hero' }) => {
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-0 overflow-hidden select-none ${className}`}
+    >
+      {/* Ambient glows */}
+      <div className="absolute top-10 right-1/4 w-[480px] h-[480px] rounded-full bg-[#F5822C]/12 dark:bg-[#F5822C]/18 blur-3xl" />
+      <div className="absolute bottom-10 left-1/4 w-[480px] h-[480px] rounded-full bg-[#3FB6D3]/12 dark:bg-[#3FB6D3]/18 blur-3xl" />
+      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-64 h-64 rounded-full bg-[#12245C]/8 dark:bg-emerald-500/10 blur-3xl" />
+
+      <svg
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 1440 900"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {/* ── GRID LINES (subtle plot/land grid) ── */}
+        <line x1="180" y1="0" x2="180" y2="900" stroke="currentColor" className="text-slate-300/50 dark:text-slate-700/40" strokeWidth="1" strokeDasharray="4 10" />
+        <line x1="1260" y1="0" x2="1260" y2="900" stroke="currentColor" className="text-slate-300/50 dark:text-slate-700/40" strokeWidth="1" strokeDasharray="4 10" />
+        <line x1="0" y1="460" x2="1440" y2="460" stroke="currentColor" className="text-slate-300/40 dark:text-slate-700/30" strokeWidth="1" strokeDasharray="6 14" />
+
+        {/* ── HOUSE / INDEPENDENT HOME BLUEPRINT (Top Right) ── */}
+        <g transform="translate(1210, 60)" className="opacity-[0.18] dark:opacity-[0.22] text-[#12245C] dark:text-[#4FC3E0]" stroke="currentColor" fill="none" strokeWidth="2.5">
+          {/* Roof */}
+          <path d="M 0,65 L 70,10 L 140,65" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Walls */}
+          <rect x="15" y="65" width="110" height="90" />
+          {/* Door */}
+          <rect x="55" y="110" width="30" height="45" rx="2" />
+          {/* Windows */}
+          <rect x="22" y="80" width="25" height="20" />
+          <rect x="93" y="80" width="25" height="20" />
+          {/* Ground line */}
+          <line x1="-20" y1="155" x2="160" y2="155" strokeWidth="2" strokeDasharray="3 3" />
+          {/* Outer ring */}
+          <circle cx="70" cy="90" r="100" strokeDasharray="6 5" strokeWidth="1.5" />
+        </g>
+
+        {/* ── G+1 / TWO-STOREY HOUSE OUTLINE (Bottom Left) ── */}
+        <g transform="translate(70, 580)" className="opacity-[0.18] dark:opacity-[0.22] text-[#F5822C]" stroke="currentColor" fill="none" strokeWidth="2">
+          {/* Ground floor */}
+          <rect x="0" y="80" width="130" height="75" />
+          {/* First floor */}
+          <rect x="0" y="10" width="130" height="70" />
+          {/* Roof gable */}
+          <path d="M -10,10 L 65,-25 L 140,10" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Balcony on 1st floor */}
+          <rect x="-10" y="50" width="150" height="8" />
+          {/* Doors + windows */}
+          <rect x="45" y="110" width="40" height="45" rx="2" />
+          <rect x="10" y="25" width="30" height="22" />
+          <rect x="90" y="25" width="30" height="22" />
+          <rect x="10" y="98" width="25" height="18" />
+          <rect x="95" y="98" width="25" height="18" />
+          {/* Floor separator line */}
+          <line x1="0" y1="80" x2="130" y2="80" strokeWidth="2.5" />
+        </g>
+
+        {/* ── APARTMENT BLOCK / FLAT OUTLINE (Top Left) ── */}
+        <g transform="translate(100, 80)" className="opacity-[0.16] dark:opacity-[0.20] text-[#3FB6D3]" stroke="currentColor" fill="none" strokeWidth="2">
+          {/* Main block */}
+          <rect x="0" y="30" width="90" height="180" rx="4" />
+          {/* Roof line */}
+          <rect x="-10" y="18" width="110" height="14" rx="2" />
+          {/* Floors - window grid */}
+          {[0,1,2,3,4].map(row => (
+            <g key={row}>
+              <rect x="10" y={50 + row * 32} width="22" height="18" rx="2" />
+              <rect x="58" y={50 + row * 32} width="22" height="18" rx="2" />
+            </g>
+          ))}
+          {/* Ground floor entry */}
+          <rect x="30" y="175" width="30" height="35" rx="2" />
+          {/* Outer pulse ring */}
+          <circle cx="45" cy="120" r="110" strokeDasharray="5 8" strokeWidth="1" />
+        </g>
+
+        {/* ── OPEN PLOT / LAND GRID MOTIF (Bottom Right) ── */}
+        <g transform="translate(1260, 540)" className="opacity-[0.18] dark:opacity-[0.22] text-emerald-600 dark:text-emerald-400" stroke="currentColor" fill="none" strokeWidth="1.5">
+          {/* Plot boundary */}
+          <rect x="0" y="0" width="150" height="120" strokeWidth="2.5" />
+          {/* Internal division lines (plot grid) */}
+          <line x1="75" y1="0" x2="75" y2="120" strokeDasharray="4 4" />
+          <line x1="0" y1="60" x2="150" y2="60" strokeDasharray="4 4" />
+          {/* Corner markers */}
+          <circle cx="0" cy="0" r="5" fill="currentColor" />
+          <circle cx="150" cy="0" r="5" fill="currentColor" />
+          <circle cx="0" cy="120" r="5" fill="currentColor" />
+          <circle cx="150" cy="120" r="5" fill="currentColor" />
+          {/* Center pin */}
+          <circle cx="75" cy="60" r="8" strokeWidth="2" />
+          <circle cx="75" cy="60" r="3" fill="currentColor" />
+          {/* Compass-style outer ring */}
+          <circle cx="75" cy="60" r="90" strokeDasharray="6 8" strokeWidth="1" />
+          {/* North arrow */}
+          <path d="M 75,-20 L 80,-5 L 75,0 L 70,-5 Z" fill="currentColor" />
+        </g>
+
+        {/* ── KEY / PROPERTY OWNERSHIP MOTIF (Center Right area) ── */}
+        <g transform="translate(1320, 340)" className="opacity-[0.15] dark:opacity-[0.20] text-[#12245C] dark:text-[#F5822C]" stroke="currentColor" fill="none" strokeWidth="2.5">
+          {/* Key bow (ring) */}
+          <circle cx="25" cy="25" r="24" />
+          <circle cx="25" cy="25" r="12" />
+          {/* Key shaft */}
+          <line x1="49" y1="25" x2="100" y2="25" strokeWidth="3" />
+          {/* Key teeth */}
+          <line x1="72" y1="25" x2="72" y2="38" strokeWidth="3" />
+          <line x1="87" y1="25" x2="87" y2="34" strokeWidth="3" />
+          <line x1="100" y1="25" x2="100" y2="38" strokeWidth="3" />
+        </g>
+
+        {/* ── RUPEE WATERMARK (Center Right) ── */}
+        <g transform="translate(1340, 150)" className="opacity-[0.12] dark:opacity-[0.18] text-[#3FB6D3]" fill="currentColor">
+          <circle cx="0" cy="0" r="80" stroke="currentColor" strokeWidth="2" fill="none" strokeDasharray="8 6" />
+          <circle cx="0" cy="0" r="64" stroke="currentColor" strokeWidth="1" fill="none" strokeDasharray="3 4" />
+          <text x="0" y="32" fontSize="90" fontFamily="'Plus Jakarta Sans', sans-serif" fontWeight="800" textAnchor="middle">₹</text>
+        </g>
+
+        {/* ── TRAJECTORY LINE (upward growth) ── */}
+        <path
+          d="M 50,750 C 350,700 700,550 1050,300 C 1200,210 1380,180 1440,160"
+          stroke="#F5822C"
+          strokeWidth="2"
+          strokeDasharray="6 6"
+          className="opacity-[0.18] dark:opacity-[0.25]"
+        />
+
+        {/* ── CROSSHAIR MARKERS ── */}
+        <g className="text-slate-400 dark:text-slate-600 opacity-30">
+          <path d="M 180,450 L 180,470 M 170,460 L 190,460" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M 1260,450 L 1260,470 M 1250,460 L 1270,460" stroke="currentColor" strokeWidth="1.5" />
+        </g>
+      </svg>
+    </div>
+  );
+};

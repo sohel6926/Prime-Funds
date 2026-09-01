@@ -7,6 +7,8 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { ApplyModal } from './components/ApplyModal';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
+import { RealEstatePage } from './pages/RealEstatePage';
+import { PropertyDetailPage } from './pages/PropertyDetailPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { InsurancesPage } from './pages/InsurancesPage';
 import { CalculatorPage } from './pages/CalculatorPage';
@@ -16,6 +18,7 @@ import { TermsPage } from './pages/TermsPage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
+  const [selectedPropertyId, setSelectedPropertyId] = useState<string>('skyline-crest-apartments');
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('pfs_theme');
@@ -59,6 +62,12 @@ export default function App() {
     setApplyModalOpen(true);
   };
 
+  const handleSelectProperty = (propertyId: string) => {
+    setSelectedPropertyId(propertyId);
+    setCurrentPage('property-detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleNavigate = (page: PageId, targetId?: string) => {
     setCurrentPage(page);
     if (targetId) {
@@ -76,7 +85,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F9FC] dark:bg-[#0B1220] text-[#1A1A2E] dark:text-[#F1F3F8] transition-colors duration-300 selection:bg-[#F5822C]/20 selection:text-[#F5822C]">
+    <div className="min-h-screen flex flex-col bg-[#F7F9FC] dark:bg-[#0B1220] text-[#1A1A2E] dark:text-[#F1F3F8] transition-colors duration-300 selection:bg-[#F5822C]/20 selection:text-[#F5822C] overflow-x-hidden w-full max-w-full">
       {/* 1. Global Sticky Header */}
       <Header
         currentPage={currentPage}
@@ -89,10 +98,25 @@ export default function App() {
       {/* 2. Dynamic Main View Area */}
       <main className="flex-1 w-full">
         {currentPage === 'home' && (
-          <HomePage onNavigate={handleNavigate} onOpenApply={handleOpenApply} />
+          <HomePage onNavigate={handleNavigate} onOpenApply={handleOpenApply} onSelectProperty={handleSelectProperty} />
         )}
         {currentPage === 'about' && (
           <AboutPage onNavigate={handleNavigate} onOpenApply={() => handleOpenApply('General Loan')} />
+        )}
+        {currentPage === 'realestate' && (
+          <RealEstatePage
+            onNavigate={handleNavigate}
+            onSelectProperty={handleSelectProperty}
+            onOpenApply={handleOpenApply}
+          />
+        )}
+        {currentPage === 'property-detail' && (
+          <PropertyDetailPage
+            propertyId={selectedPropertyId}
+            onNavigate={handleNavigate}
+            onSelectProperty={handleSelectProperty}
+            onOpenApply={handleOpenApply}
+          />
         )}
         {currentPage === 'services' && (
           <ServicesPage onNavigate={handleNavigate} onOpenApply={handleOpenApply} />

@@ -33,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
   const navLinks: { id: PageId; label: string }[] = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Us' },
+    { id: 'realestate', label: 'Real Estate' },
     { id: 'services', label: 'Services' },
     { id: 'insurances', label: 'Insurances' },
     { id: 'calculator', label: 'Loan Calculator' },
@@ -59,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-slate-300 font-medium">
               <span className="w-2 h-2 rounded-full bg-[#3FB6D3] animate-pulse"></span>
-              Facilitating All Loans & Insurances with 40+ Top Banks & NBFCs
+              Facilitating Real Estate, All Loans & Insurances with 40+ Top Banks & NBFCs
             </span>
           </div>
           <div className="flex items-center gap-5">
@@ -77,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-6">
+        <div className="flex items-center justify-between h-[72px] sm:h-20 gap-2 sm:gap-6">
           {/* Logo container with responsive scaling */}
           <button
             onClick={() => handleNavClick('home')}
@@ -90,7 +91,9 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Desktop Nav links */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {navLinks.map(link => {
-              const isActive = currentPage === link.id;
+              const isActive =
+                currentPage === link.id ||
+                (link.id === 'realestate' && currentPage === 'property-detail');
               return (
                 <button
                   key={link.id}
@@ -148,7 +151,9 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="lg:hidden border-t border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0F1626] px-4 pt-3 pb-6 shadow-xl animate-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-1.5">
             {navLinks.map(link => {
-              const isActive = currentPage === link.id;
+              const isActive =
+                currentPage === link.id ||
+                (link.id === 'realestate' && currentPage === 'property-detail');
               return (
                 <button
                   key={link.id}

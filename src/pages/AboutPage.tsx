@@ -11,10 +11,19 @@ import {
   TrustStatsBackgroundArt,
   ServicesBackgroundArt,
   AboutUsBackgroundArt,
-  ContactBackgroundArt,
   GlowAura
 } from '../components/BackgroundPatterns';
-import { Target, Compass, Award } from 'lucide-react';
+import {
+  Target,
+  Compass,
+  Award,
+  Building2,
+  Landmark,
+  ShieldCheck,
+  ArrowRight,
+  Sparkles,
+  CheckCircle2
+} from 'lucide-react';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -40,11 +49,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#12245C] dark:text-white tracking-tight min-h-[3.5rem] sm:min-h-[4.5rem]">
             <TypewriterHeading
               phrases={[
-                "India’s Premier Financial Facilitation Partner",
+                "India’s Integrated Real Estate & Financial Facilitator",
                 "Dedicated Advisory Led by Saikiran.V & Team",
-                "Empowering 10,000+ Borrowers Across India"
+                "Empowering 18,000+ Borrowers & Property Buyers"
               ]}
-              highlightWords={['Premier Financial Facilitation Partner', 'Saikiran.V & Team', '10,000+ Borrowers']}
+              highlightWords={['Integrated Real Estate & Financial Facilitator', 'Saikiran.V & Team', '18,000+ Borrowers']}
               highlightClassName="text-[#F5822C]"
               typingSpeed={45}
               deletingSpeed={25}
@@ -52,15 +61,143 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
             />
           </h1>
 
-          {/* Short intro: 2-3 real sentences */}
+          {/* Short intro */}
           <p className="text-base sm:text-lg text-[#5B6377] dark:text-[#9BA3B7] leading-relaxed max-w-3xl mx-auto">
-            Prime Funds Solutions Pvt. Ltd. is an established Indian financial consultancy dedicated to simplifying retail loans and asset insurance. We guide borrowers through complex banking procedures to identify the most competitive credit terms. Our team is committed to transparency, swift execution, and long-term client financial wellness.
+            Prime Funds Solutions Pvt. Ltd. is a premier Indian financial & real estate consultancy dedicated to simplifying property acquisition, retail and commercial loans, and comprehensive asset insurance. We guide clients through every stage—from handpicking vetted properties to securing bank loan sanctions across 40+ leading institutions and shielding assets with robust coverage.
           </p>
         </div>
       </section>
 
-      {/* 2. Mission & Vision Cards */}
+      {/* 2. THE THREE INTEGRATED PILLARS */}
       <section className="py-16 bg-white dark:bg-[#0B1220] relative overflow-hidden">
+        <ArchitecturalGridPattern />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#F5822C]/10 text-[#F5822C] text-xs font-bold uppercase tracking-wider">
+              Core Capabilities
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#12245C] dark:text-white">
+              Our 3-in-1 Integrated Service Ecosystem
+            </h2>
+            <p className="text-sm text-[#5B6377] dark:text-[#9BA3B7]">
+              Eliminate coordination friction. We unite property discovery, bank loan approvals, and asset protection under a single trusted advisory.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Pillar 1: Real Estate Facilitation */}
+            <ScrollReveal delay={0}>
+              <div className="group h-full p-7 rounded-2xl bg-slate-50 dark:bg-[#151E32] border-2 border-slate-200 dark:border-slate-700 hover:border-[#F5822C] dark:hover:border-[#F5822C] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#F5822C]/15 group-hover:bg-[#F5822C] text-[#F5822C] group-hover:text-white flex items-center justify-center transition-colors">
+                    <Building2 className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#12245C] dark:text-white group-hover:text-[#F5822C] transition-colors">
+                    1. Real Estate & Properties
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5B6377] dark:text-[#9BA3B7] leading-relaxed">
+                    Curated inventory of verified open plots, independent houses, G+1 duplex homes, and apartment flats with up to 90% pre-approved bank loans and 0% buyer brokerage.
+                  </p>
+                  <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-200 dark:border-slate-800">
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
+                      <span>100% Verified Titles & RERA Compliance</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
+                      <span>Direct Builder Rates with Zero Markups</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pt-6">
+                  <button
+                    onClick={() => onNavigate('realestate')}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-[#0F1626] hover:bg-[#F5822C] hover:text-white text-[#12245C] dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+                  >
+                    <span>Browse Properties</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Pillar 2: Loan Facilitation */}
+            <ScrollReveal delay={100}>
+              <div className="group h-full p-7 rounded-2xl bg-slate-50 dark:bg-[#151E32] border-2 border-slate-200 dark:border-slate-700 hover:border-[#12245C] dark:hover:border-[#4FC3E0] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#12245C]/15 dark:bg-white/10 group-hover:bg-[#12245C] text-[#12245C] dark:text-[#4FC3E0] group-hover:text-white flex items-center justify-center transition-colors">
+                    <Landmark className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#12245C] dark:text-white group-hover:text-[#4FC3E0] transition-colors">
+                    2. Loan Financing (40+ Banks)
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5B6377] dark:text-[#9BA3B7] leading-relaxed">
+                    Personal, home, mortgage, business, and vehicle credit from premier institutions (HDFC, SBI, ICICI, Axis, Kotak) with up to 90% funding and lowest interest rates.
+                  </p>
+                  <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-200 dark:border-slate-800">
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
+                      <span>Instant Sanction in 24 to 48 Hours</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
+                      <span>Single-Window Doorstep Documentation</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pt-6">
+                  <button
+                    onClick={() => onNavigate('services')}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-[#0F1626] hover:bg-[#12245C] hover:text-white text-[#12245C] dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+                  >
+                    <span>Explore Loan Schemes</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Pillar 3: Asset & Life Insurance */}
+            <ScrollReveal delay={200}>
+              <div className="group h-full p-7 rounded-2xl bg-slate-50 dark:bg-[#151E32] border-2 border-slate-200 dark:border-slate-700 hover:border-[#3FB6D3] dark:hover:border-[#3FB6D3] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#3FB6D3]/15 group-hover:bg-[#3FB6D3] text-[#3FB6D3] group-hover:text-white flex items-center justify-center transition-colors">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#12245C] dark:text-white group-hover:text-[#3FB6D3] transition-colors">
+                    3. Insurance Protection
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5B6377] dark:text-[#9BA3B7] leading-relaxed">
+                    Protecting structural assets, commercial spaces, vehicles, health, and family financial security with term life plans and mortgage loan coverage shields.
+                  </p>
+                  <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-200 dark:border-slate-800">
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
+                      <span>Property Structure & Fire Perils Cover</span>
+                    </li>
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#25D366]" />
+                      <span>100% Cashless Medical & Motor Claims</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pt-6">
+                  <button
+                    onClick={() => onNavigate('insurances')}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-[#0F1626] hover:bg-[#3FB6D3] hover:text-white text-[#12245C] dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+                  >
+                    <span>View Insurance Plans</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Mission & Vision Cards */}
+      <section className="py-16 bg-slate-50 dark:bg-[#0F1626] border-y border-[#E5E9F2] dark:border-[#2A3550] relative overflow-hidden">
         <ArchitecturalGridPattern />
         <GlowAura position="center" variant="mixed" opacity="opacity-25 dark:opacity-15" />
 
@@ -68,7 +205,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Mission Card */}
             <ScrollReveal delay={0}>
-              <div className="group h-full p-8 rounded-2xl bg-slate-50/95 dark:bg-[#151E32]/95 backdrop-blur-sm border-2 border-slate-200/90 dark:border-slate-700/80 hover:border-[#F5822C] dark:hover:border-[#F5822C] shadow-sm hover:shadow-2xl hover:shadow-[#F5822C]/10 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+              <div className="group h-full p-8 rounded-2xl bg-white dark:bg-[#151E32] backdrop-blur-sm border-2 border-slate-200/90 dark:border-slate-700/80 hover:border-[#F5822C] dark:hover:border-[#F5822C] shadow-sm hover:shadow-2xl hover:shadow-[#F5822C]/10 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-xl bg-[#F5822C]/15 group-hover:bg-[#F5822C] text-[#F5822C] group-hover:text-white flex items-center justify-center transition-colors duration-300">
                     <Target className="w-6 h-6" />
@@ -77,7 +214,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
                     Our Mission
                   </h3>
                   <p className="text-sm text-[#5B6377] dark:text-[#9BA3B7] leading-relaxed">
-                    To democratize access to transparent credit across India by offering personalized loan comparisons and expert advisory services that save our clients time and capital.
+                    To democratize access to transparent credit and verified real estate across India by offering personalized loan comparisons, legal property vetting, and expert advisory that saves our clients time and capital.
                   </p>
                 </div>
                 <div className="pt-6 border-t border-slate-200 dark:border-slate-800 text-xs font-semibold text-[#12245C] dark:text-[#4FC3E0]">
@@ -88,7 +225,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
 
             {/* Vision Card */}
             <ScrollReveal delay={100}>
-              <div className="group h-full p-8 rounded-2xl bg-slate-50/95 dark:bg-[#151E32]/95 backdrop-blur-sm border-2 border-slate-200/90 dark:border-slate-700/80 hover:border-[#3FB6D3] dark:hover:border-[#3FB6D3] shadow-sm hover:shadow-2xl hover:shadow-[#3FB6D3]/15 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+              <div className="group h-full p-8 rounded-2xl bg-white dark:bg-[#151E32] backdrop-blur-sm border-2 border-slate-200/90 dark:border-slate-700/80 hover:border-[#3FB6D3] dark:hover:border-[#3FB6D3] shadow-sm hover:shadow-2xl hover:shadow-[#3FB6D3]/15 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-xl bg-[#3FB6D3]/15 group-hover:bg-[#3FB6D3] text-[#3FB6D3] dark:text-[#4FC3E0] group-hover:text-white flex items-center justify-center transition-colors duration-300">
                     <Compass className="w-6 h-6" />
@@ -97,7 +234,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
                     Our Vision
                   </h3>
                   <p className="text-sm text-[#5B6377] dark:text-[#9BA3B7] leading-relaxed">
-                    To become the most trusted national household name for loans and insurance facilitation, renowned for unparalleled lending partnerships and superior advisory satisfaction.
+                    To become the most trusted national household name for integrated real estate, loans, and insurance facilitation, renowned for unparalleled lending partnerships and superior advisory satisfaction.
                   </p>
                 </div>
                 <div className="pt-6 border-t border-slate-200 dark:border-slate-800 text-xs font-semibold text-[#12245C] dark:text-[#4FC3E0]">
@@ -109,8 +246,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
         </div>
       </section>
 
-      {/* 3. 3-4 "Why Choose Us" points */}
-      <section className="py-16 bg-slate-50 dark:bg-[#0F1626] border-y border-[#E5E9F2] dark:border-[#2A3550] relative overflow-hidden">
+      {/* 4. Why Choose Us */}
+      <section className="py-16 bg-white dark:bg-[#0B1220] relative overflow-hidden">
         <ServicesBackgroundArt />
         <DotGridPattern size={1.2} gap={32} maskRadial />
 
@@ -130,7 +267,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
               <div className="space-y-4">
                 {WHY_CHOOSE_US.map((item, idx) => (
                   <ScrollReveal key={item.title} delay={idx * 80}>
-                    <div className="group flex items-start gap-4 p-4 rounded-2xl bg-white/95 dark:bg-[#151E32]/95 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 md:hover:border-[#F5822C] md:dark:hover:border-[#F5822C] shadow-sm md:hover:shadow-xl md:hover:shadow-[#F5822C]/10 md:hover:-translate-y-1 transition-all duration-300">
+                    <div className="group flex items-start gap-4 p-4 rounded-2xl bg-slate-50/95 dark:bg-[#151E32]/95 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 md:hover:border-[#F5822C] md:dark:hover:border-[#F5822C] shadow-sm md:hover:shadow-xl md:hover:shadow-[#F5822C]/10 md:hover:-translate-y-1 transition-all duration-300">
                       <div className="w-10 h-10 rounded-xl bg-[#12245C]/10 md:group-hover:bg-[#F5822C] dark:bg-white/10 text-[#12245C] md:group-hover:text-white dark:text-[#4FC3E0] flex items-center justify-center flex-shrink-0 transition-colors duration-300">
                         <DynamicIcon name={item.iconName} className="w-5 h-5" />
                       </div>
@@ -165,7 +302,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
                         Dedicated Leadership
                       </span>
                       <h3 className="text-lg font-bold">
-                        Personalized guidance led by Saikiran.V and our team of senior finance specialists.
+                        Personalized guidance led by Saikiran.V and our team of senior finance & real estate specialists.
                       </h3>
                     </div>
                   </div>
@@ -176,8 +313,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
         </div>
       </section>
 
-      {/* 4. Trust Stats */}
-      <section className="py-16 bg-white dark:bg-[#0B1220] relative overflow-hidden">
+      {/* 5. Trust Stats */}
+      <section className="py-16 bg-slate-50 dark:bg-[#0B1220] border-t border-[#E5E9F2] dark:border-[#2A3550] relative overflow-hidden">
         <TrustStatsBackgroundArt />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -186,14 +323,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
               Proven Track Record of Facilitation
             </h2>
             <p className="text-sm text-[#5B6377] dark:text-[#9BA3B7] mt-1">
-              Our financial metrics reflect consistent trust, rapid disbursements, and client satisfaction.
+              Our financial and property metrics reflect consistent trust, rapid disbursements, and client satisfaction.
             </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {ABOUT_STATS.map((stat, idx) => (
               <ScrollReveal key={stat.label} delay={idx * 80}>
-                <div className="p-6 rounded-2xl bg-slate-50/95 dark:bg-[#151E32]/95 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 md:hover:border-[#F5822C] md:dark:hover:border-[#F5822C] text-center space-y-2 shadow-sm md:hover:shadow-xl md:hover:shadow-[#F5822C]/10 md:hover:-translate-y-1 transition-all duration-300">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#151E32] backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 md:hover:border-[#F5822C] md:dark:hover:border-[#F5822C] text-center space-y-2 shadow-sm md:hover:shadow-xl md:hover:shadow-[#F5822C]/10 md:hover:-translate-y-1 transition-all duration-300">
                   <div className="text-3xl sm:text-4xl font-extrabold text-[#F5822C] flex items-center justify-center">
                     <CountUpNumber
                       end={stat.numericValue}
@@ -214,20 +351,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
           <div className="mt-12 p-8 rounded-2xl bg-[#12245C] dark:bg-[#0F1626] text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
             <GlowAura position="top-right" variant="orange" opacity="opacity-30" />
             <div className="space-y-1 text-center sm:text-left relative z-10">
-              <h3 className="text-xl font-bold">Ready to discuss your loan requirements?</h3>
+              <h3 className="text-xl font-bold">Ready to explore properties or loan solutions?</h3>
               <p className="text-sm text-slate-300">
                 Contact our senior facilitator Saikiran.V directly or submit a quick application.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 relative z-10">
               <a
-                href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I would like to consult with Prime Funds Solutions regarding loan options.")}
+                href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I would like to consult with Prime Funds Solutions regarding real estate and loan options.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-md transition-transform active:scale-95"
               >
                 <WhatsAppIcon size={16} />
-                WhatsApp Advisory
+                <span>WhatsApp Advisory</span>
               </a>
               <button
                 onClick={onOpenApply}

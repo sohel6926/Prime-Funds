@@ -155,8 +155,11 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                     onChange={e => setFormData({ ...formData, serviceType: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
                   >
+                    <option value="Real Estate Property Purchase">Real Estate Property Purchase</option>
+                    <option value="Home Loan">Home Loan (Villas & Apartments)</option>
+                    <option value="Plot & Land Construction Loan">Plot & Land Construction Loan</option>
+                    <option value="Commercial Property & LRD Loan">Commercial Property & LRD Loan</option>
                     <option value="Personal Loan">Personal Loan</option>
-                    <option value="Home Loan">Home Loan</option>
                     <option value="Business Loan">Business Loan</option>
                     <option value="Mortgage Loan">Mortgage Loan</option>
                     <option value="Gold Loan">Gold Loan</option>
@@ -166,6 +169,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
                     <option value="Secured & Unsecured Loan">Secured & Unsecured Loan</option>
                     <option value="Micro Finance">Micro Finance</option>
                     <option value="Balance Transfer & LAP">Balance Transfer & LAP</option>
+                    <option value="Property & Structure Insurance">Property & Structure Insurance</option>
                     <option value="Health Insurance">Health Insurance (₹5L-5Cr)</option>
                     <option value="Life / Term Insurance">Life / Term Insurance</option>
                     <option value="Vehicle / General Insurance">Vehicle / General Insurance</option>

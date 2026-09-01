@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
 import { LOAN_SERVICES } from '../data/loansData';
+import { PROPERTY_LISTINGS } from '../data/realEstateData';
 import { HOME_TRUST_POINTS, HOME_TEASERS, BRAND_DETAILS } from '../data/contentData';
 import { DynamicIcon, WhatsAppIcon, PhoneCallIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
@@ -9,6 +10,7 @@ import heroAdvisoryImg from '../assets/images/hero_loan_advisory_1788091267798.j
 import {
   HeroFinancialIllustration,
   DotGridPattern,
+  ArchitecturalGridPattern,
   TrustStatsBackgroundArt,
   ServicesBackgroundArt,
   AboutUsBackgroundArt,
@@ -24,15 +26,18 @@ import {
   Calculator,
   Send,
   Building2,
-  Sparkles
+  Sparkles,
+  MapPin,
+  Landmark
 } from 'lucide-react';
 
 interface HomePageProps {
   onNavigate: (page: PageId, targetId?: string) => void;
   onOpenApply: (serviceName?: string) => void;
+  onSelectProperty?: (propertyId: string) => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply }) => {
+export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onSelectProperty }) => {
   // Quick Enquiry Form State
   const [formData, setFormData] = useState({
     name: '',
@@ -131,11 +136,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply }) =
               {/* Dual CTA */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-3">
                 <button
-                  onClick={() => onOpenApply()}
+                  onClick={() => onNavigate('realestate')}
                   className="px-7 py-3.5 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/30 hover:shadow-xl hover:shadow-[#F5822C]/40 active:scale-95 transition-all flex items-center justify-center gap-2"
                 >
-                  <span>Apply For Loan</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <Building2 className="w-4 h-4" />
+                  <span>Explore Real Estate</span>
                 </button>
 
                 <button
@@ -166,15 +171,27 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply }) =
                       <span className="text-xs font-semibold text-[#4FC3E0] uppercase tracking-wider">
                         Expert Advisory
                       </span>
-                      <h3 className="text-base font-bold leading-snug">
-                        Empowering Indian dreams with tailored financing solutions.
+                      <h3 className="text-base font-bold leading-snug min-h-[2.5rem]">
+                        <TypewriterHeading
+                          phrases={[
+                            "Empowering Indian dreams with tailored financing.",
+                            "Open Plots · Houses · G+1 · Flats — We finance it all.",
+                            "Your property. Our loan network. Seamless.",
+                            "40+ banks. Lowest rates. Fastest approvals."
+                          ]}
+                          highlightWords={['Open Plots', 'tailored financing', 'Lowest rates', 'Fastest approvals']}
+                          highlightClassName="text-[#F5822C]"
+                          typingSpeed={45}
+                          deletingSpeed={25}
+                          pauseDuration={2500}
+                        />
                       </h3>
                     </div>
                   </div>
                 </div>
 
                 {/* Floating Loan-Types Checklist Card with Bright Aesthetic Border */}
-                <div className="absolute -bottom-6 -left-4 sm:-left-8 bg-white dark:bg-[#151E32] p-4 rounded-2xl shadow-2xl border-2 border-[#F5822C] dark:border-[#F5822C] ring-4 ring-[#F5822C]/15 dark:ring-[#F5822C]/25 max-w-xs animate-in slide-in-from-bottom duration-500 backdrop-blur-md">
+                <div className="absolute -bottom-6 left-2 sm:-left-8 bg-white dark:bg-[#151E32] p-3.5 sm:p-4 rounded-2xl shadow-2xl border-2 border-[#F5822C] dark:border-[#F5822C] ring-4 ring-[#F5822C]/15 dark:ring-[#F5822C]/25 max-w-[270px] sm:max-w-xs animate-in slide-in-from-bottom duration-500 backdrop-blur-md">
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-slate-800">
                     <div className="w-6 h-6 rounded-md bg-[#F5822C]/15 flex items-center justify-center text-[#F5822C]">
                       <Shield className="w-3.5 h-3.5" />
@@ -204,7 +221,119 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply }) =
         </div>
       </section>
 
-      {/* 2. SERVICES PREVIEW */}
+      {/* 2. FEATURED REAL ESTATE & PROPERTIES SHOWCASE */}
+      <section className="py-16 bg-white dark:bg-[#0B1220] border-t border-[#E5E9F2] dark:border-[#2A3550] relative overflow-hidden">
+        <ArchitecturalGridPattern />
+        <DotGridPattern size={1.2} gap={30} maskRadial />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#F5822C]/10 text-[#F5822C] text-xs font-bold uppercase tracking-wider mb-2">
+                <Building2 className="w-3.5 h-3.5" />
+                <span>Prime Real Estate Portfolio</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#12245C] dark:text-white">
+                Featured Properties with Pre-Approved Bank Loans
+              </h2>
+              <p className="text-sm text-[#5B6377] dark:text-[#9BA3B7] mt-1">
+                Handpicked open plots, independent houses, G+1 homes & apartment flats with up to 90% loan funding.
+              </p>
+            </div>
+
+            <button
+              onClick={() => onNavigate('realestate')}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#12245C] hover:bg-[#1c3582] dark:bg-[#F5822C] dark:hover:bg-[#e0711f] text-white text-xs font-bold transition-all shadow-md active:scale-95 flex-shrink-0"
+            >
+              <span>View More Properties</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* 3 Featured Property Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {PROPERTY_LISTINGS.filter(p => p.featured).slice(0, 3).map((property, idx) => (
+              <ScrollReveal key={property.id} delay={idx * 80}>
+                <div className="group h-full flex flex-col justify-between rounded-2xl bg-slate-50 dark:bg-[#151E32] border-2 border-slate-200 dark:border-slate-700/80 hover:border-[#F5822C] dark:hover:border-[#F5822C] shadow-sm hover:shadow-xl hover:shadow-[#F5822C]/10 transition-all duration-300 overflow-hidden hover:-translate-y-1.5">
+                  <div
+                    className="relative aspect-[16/10] overflow-hidden bg-slate-900 cursor-pointer"
+                    onClick={() => {
+                      if (onSelectProperty) onSelectProperty(property.id);
+                      else onNavigate('realestate');
+                    }}
+                  >
+                    <img
+                      src={property.images[0]}
+                      alt={property.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/30"></div>
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                      <span className="px-2.5 py-1 rounded-md bg-[#12245C]/90 text-white text-[11px] font-bold">
+                        {property.subType}
+                      </span>
+                      <span className="px-2.5 py-1 rounded-md bg-[#25D366] text-slate-950 text-[11px] font-extrabold">
+                        {property.status}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between text-white">
+                      <div>
+                        <div className="text-base font-extrabold text-white leading-tight">
+                          {property.price}
+                        </div>
+                        <div className="text-[11px] text-slate-300">
+                          {property.area}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <MapPin className="w-3.5 h-3.5 text-[#F5822C] flex-shrink-0" />
+                        <span className="truncate">{property.location}</span>
+                      </div>
+                      <h3
+                        onClick={() => {
+                          if (onSelectProperty) onSelectProperty(property.id);
+                          else onNavigate('realestate');
+                        }}
+                        className="text-base font-bold text-[#12245C] dark:text-white group-hover:text-[#F5822C] transition-colors cursor-pointer line-clamp-1"
+                      >
+                        {property.title}
+                      </h3>
+                      <div className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800 text-[#12245C] dark:text-[#4FC3E0]">
+                        {property.bhkOrSpecs}
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
+                      <div className="flex items-center gap-2 text-xs text-[#F5822C] font-semibold">
+                        <Landmark className="w-3.5 h-3.5" />
+                        <span>Pre-Approved Loan: {property.eligibleLoans[0]?.interestRate || '8.35%'}</span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          if (onSelectProperty) onSelectProperty(property.id);
+                          else onNavigate('realestate');
+                        }}
+                        className="w-full py-2 px-3 rounded-xl bg-[#12245C] hover:bg-[#1c3582] dark:bg-[#F5822C] dark:hover:bg-[#e0711f] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                      >
+                        <span>View Property & Financing</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 2.5 SERVICES PREVIEW */}
       <section className="py-16 bg-white dark:bg-[#0B1220] relative overflow-hidden">
         {/* Background Visual Design & Subtle Watermarks */}
         <ServicesBackgroundArt />

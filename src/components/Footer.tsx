@@ -118,6 +118,15 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
+                  onClick={() => handleNav('realestate')}
+                  className="text-slate-400 hover:text-[#F5822C] transition-colors flex items-center gap-1.5 font-semibold text-[#F5822C]"
+                >
+                  <ArrowRight className="w-3 h-3 text-[#F5822C]" />
+                  Real Estate & Properties
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => handleNav('services')}
                   className="text-slate-400 hover:text-[#F5822C] transition-colors flex items-center gap-1.5"
                 >

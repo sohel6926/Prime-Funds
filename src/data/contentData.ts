@@ -43,17 +43,25 @@ export const HOME_TRUST_POINTS: TrustPoint[] = [
 
 export const HOME_TEASERS: QuickTeaser[] = [
   {
-    id: 'about',
-    title: 'About Prime Funds',
-    description: 'Discover our mission to provide hassle-free financial solutions across India.',
-    buttonText: 'Read Our Story',
-    imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-    iconName: 'Building'
+    id: 'realestate',
+    title: 'Real Estate & Properties',
+    description: 'Explore verified residential villas, luxury apartments, commercial hubs & gated plots with pre-approved loans.',
+    buttonText: 'Explore Properties',
+    imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80',
+    iconName: 'Building2'
+  },
+  {
+    id: 'services',
+    title: 'All Loan Services',
+    description: 'Personal, home, mortgage, business, and agriculture loans tailored with the lowest interest rates.',
+    buttonText: 'View All Loans',
+    imageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80',
+    iconName: 'Coins'
   },
   {
     id: 'insurances',
-    title: 'Insurance Solutions',
-    description: 'Safeguard your family and valuable assets with our complete protection plans.',
+    title: 'Asset & Life Insurance',
+    description: 'Protect your family and property assets with comprehensive life and general insurance plans.',
     buttonText: 'View Insurance Plans',
     imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
     iconName: 'Shield'
@@ -65,44 +73,36 @@ export const HOME_TEASERS: QuickTeaser[] = [
     buttonText: 'Calculate EMI Now',
     imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80',
     iconName: 'Calculator'
-  },
-  {
-    id: 'contact',
-    title: 'Get In Touch',
-    description: 'Speak directly with our loan advisors to receive immediate personalized assistance.',
-    buttonText: 'Contact Our Team',
-    imageUrl: 'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=600&q=80',
-    iconName: 'PhoneCall'
   }
 ];
 
 export const ABOUT_STATS = [
-  { prefix: '₹', numericValue: 500, suffix: '+ Cr', value: '₹500+ Cr', label: 'Total Loans Facilitated' },
-  { prefix: '', numericValue: 15000, suffix: '+', value: '15,000+', label: 'Satisfied Retail & MSME Clients' },
-  { prefix: '', numericValue: 40, suffix: '+', value: '40+', label: 'Empaneled Banks & NBFCs' },
-  { prefix: '', numericValue: 99, suffix: '%', value: '99%', label: 'Customer Recommendation Rate' }
+  { prefix: '₹', numericValue: 750, suffix: '+ Cr', value: '₹750+ Cr', label: 'Loans & Property Facilitated' },
+  { prefix: '', numericValue: 18000, suffix: '+', value: '18,000+', label: 'Satisfied Borrowers & Property Buyers' },
+  { prefix: '', numericValue: 40, suffix: '+', value: '40+', label: 'Empaneled Banks & NBFC Partners' },
+  { prefix: '', numericValue: 99.4, suffix: '%', value: '99.4%', label: 'Sanction & Delivery Success Rate' }
 ];
 
 export const WHY_CHOOSE_US = [
   {
-    title: 'Unbiased Multi-Bank Options',
-    description: 'We compare offers across 40+ leading financial institutions to secure the lowest rates for you.',
+    title: '3-in-1 Integrated Platform',
+    description: 'Find verified real estate properties, secure instant bank loans up to 90%, and protect assets with insurance under one single roof.',
+    iconName: 'Sparkles'
+  },
+  {
+    title: 'Unbiased Multi-Bank Options (40+ Banks)',
+    description: 'We compare offers across 40+ leading financial institutions to secure the lowest rates and highest loan amounts for you.',
     iconName: 'Scale'
   },
   {
+    title: '100% Legal & RERA Vetted Projects',
+    description: 'Every property listed or financed undergoes rigorous title vetting, municipal approval checks, and legal clearance.',
+    iconName: 'ShieldCheck'
+  },
+  {
     title: 'Dedicated Financial Facilitator',
-    description: 'Your assigned loan specialist manages every document and coordinate directly with bank underwriters.',
+    description: 'Your assigned specialist led by Saikiran.V manages every document, site visit, and bank coordination with zero hassle.',
     iconName: 'UserCheck'
-  },
-  {
-    title: 'Zero Hidden Upfront Costs',
-    description: 'We maintain complete transparency in our facilitation process with no surprise consulting charges.',
-    iconName: 'Lock'
-  },
-  {
-    title: 'Comprehensive Portfolio Coverage',
-    description: 'From personal loans to commercial mortgage and life insurance, we cover all your financial requirements.',
-    iconName: 'Layers'
   }
 ];
 
