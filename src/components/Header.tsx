@@ -80,8 +80,20 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-[82px] sm:h-[86px] md:h-20 gap-2 sm:gap-6">
           
-          {/* Mobile Left Spacer to keep layout perfectly balanced */}
-          <div className="lg:hidden w-8 sm:w-10 opacity-0 pointer-events-none" aria-hidden="true" />
+          {/* Mobile Left: Theme Toggle Button */}
+          <div className="lg:hidden flex items-center z-20">
+            <button
+              onClick={onToggleTheme}
+              aria-label={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              className="p-2 sm:p-2.5 rounded-xl border-2 border-[#E5E9F2] dark:border-[#2A3550] bg-slate-50 dark:bg-[#151E32] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-[#F5822C] dark:hover:text-[#F5822C] transition-all focus:outline-none focus:ring-2 focus:ring-[#F5822C] active:scale-95 shadow-sm"
+            >
+              {isDark ? (
+                <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 animate-in spin-in-90 duration-300" />
+              ) : (
+                <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-[#12245C] animate-in spin-in-90 duration-300" />
+              )}
+            </button>
+          </div>
 
           {/* Logo container: Centered on mobile with highlight capsule, left-aligned on desktop */}
           <button
@@ -116,13 +128,13 @@ export const Header: React.FC<HeaderProps> = ({
             })}
           </nav>
 
-          {/* Right Action Cluster: Theme Toggle + Primary CTA + Hamburger */}
+          {/* Right Action Cluster: Theme Toggle (Desktop) + Primary CTA + Hamburger (Mobile) */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 ml-auto sm:ml-0 pl-1 sm:pl-0 z-20">
-            {/* Theme Toggle Button */}
+            {/* Desktop Theme Toggle Button */}
             <button
               onClick={onToggleTheme}
               aria-label={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
-              className="p-2 sm:p-2.5 rounded-xl border-2 border-[#E5E9F2] dark:border-[#2A3550] bg-slate-50 dark:bg-[#151E32] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-[#F5822C] dark:hover:text-[#F5822C] transition-all focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
+              className="hidden lg:inline-flex p-2 sm:p-2.5 rounded-xl border-2 border-[#E5E9F2] dark:border-[#2A3550] bg-slate-50 dark:bg-[#151E32] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-[#F5822C] dark:hover:text-[#F5822C] transition-all focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
             >
               {isDark ? (
                 <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 animate-in spin-in-90 duration-300" />
