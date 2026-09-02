@@ -78,14 +78,20 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[72px] sm:h-20 gap-2 sm:gap-6">
-          {/* Logo container with responsive scaling */}
+        <div className="relative flex items-center justify-between h-[82px] sm:h-[86px] md:h-20 gap-2 sm:gap-6">
+          
+          {/* Mobile Left Spacer to keep layout perfectly balanced */}
+          <div className="lg:hidden w-8 sm:w-10 opacity-0 pointer-events-none" aria-hidden="true" />
+
+          {/* Logo container: Centered on mobile with highlight capsule, left-aligned on desktop */}
           <button
             onClick={() => handleNavClick('home')}
-            className="flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-[#F5822C] rounded-lg text-left"
+            className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-[#F5822C] rounded-2xl text-left z-10 transition-transform active:scale-95"
             aria-label="Prime Funds Solutions - Home"
           >
-            <BrandLogo isDark={isDark} />
+            <div className="px-3.5 py-1.5 sm:px-0 sm:py-0 rounded-2xl bg-white/95 dark:bg-[#121E36]/95 lg:bg-transparent lg:dark:bg-transparent border border-orange-500/35 dark:border-orange-400/45 lg:border-none shadow-md shadow-orange-500/15 dark:shadow-[0_0_24px_rgba(245,130,44,0.35)] lg:shadow-none backdrop-blur-md transition-all duration-300 flex items-center justify-center ring-1 ring-orange-500/10 lg:ring-0">
+              <BrandLogo isDark={isDark} />
+            </div>
           </button>
 
           {/* Desktop Nav links */}
@@ -110,8 +116,8 @@ export const Header: React.FC<HeaderProps> = ({
             })}
           </nav>
 
-          {/* Right Action Cluster: Theme Toggle + Primary CTA */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 ml-auto sm:ml-0 pl-1 sm:pl-0">
+          {/* Right Action Cluster: Theme Toggle + Primary CTA + Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 ml-auto sm:ml-0 pl-1 sm:pl-0 z-20">
             {/* Theme Toggle Button */}
             <button
               onClick={onToggleTheme}

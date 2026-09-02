@@ -36,11 +36,17 @@ export interface InsuranceItem {
   features: string[];
 }
 
+export type PropertyClass = 'Residential' | 'Commercial' | 'Agriculture';
+
 export type PropertyCategory =
   | 'Open Plots'
   | 'Independent Houses'
   | 'G+1 Houses'
-  | 'Apartment Flats';
+  | 'Apartment Flats'
+  | 'Commercial'
+  | 'Agriculture'
+  | 'Commercial Space'
+  | 'Farmland';
 
 export interface PropertyLoanOption {
   loanId: string;
@@ -64,6 +70,7 @@ export interface PropertyInsuranceOption {
 export interface PropertyItem {
   id: string;
   title: string;
+  propertyClass?: PropertyClass;
   propertyType: PropertyCategory;
   subType: string;
   location: string;
@@ -72,8 +79,10 @@ export interface PropertyItem {
   numericPrice: number;
   pricePerSqFt?: string;
   area: string;
+  numericArea?: number;
+  areaUnit?: 'sq.yrds' | 'acres' | 'sq.ft';
   bhkOrSpecs: string;
-  status: 'Ready to Move' | 'Under Construction' | 'Clear Title Plots' | 'Newly Constructed';
+  status: 'Ready to Move' | 'Under Construction' | 'Clear Title Plots' | 'Newly Constructed' | 'Clear Title Farmland' | 'Ready for Registration';
   reraId?: string;
   possessionDate: string;
   tagline: string;

@@ -157,13 +157,18 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
             {/* Property Title & Location */}
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 flex-wrap">
+                {property.propertyClass && (
+                  <span className="px-2.5 py-1 rounded-md bg-[#12245C]/10 dark:bg-white/10 text-[#12245C] dark:text-white text-[11px] font-bold border border-[#12245C]/15">
+                    {property.propertyClass}
+                  </span>
+                )}
                 <span className="px-2.5 py-1 rounded-md bg-[#F5822C]/10 text-[#F5822C] text-[11px] font-bold border border-[#F5822C]/20">
                   {property.propertyType}
                 </span>
                 <span className="text-slate-400">•</span>
                 <MapPin className="w-3.5 h-3.5 text-[#F5822C]" />
-                <span>{property.location}</span>
+                <span>{property.location}, {property.city}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-[#12245C] dark:text-white leading-tight">
                 {property.title}
