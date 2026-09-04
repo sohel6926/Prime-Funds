@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { DynamicIcon, WhatsAppIcon, PhoneCallIcon, EmailIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { TypewriterHeading } from '../components/TypewriterHeading';
@@ -26,6 +26,8 @@ interface ContactPageProps {
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
+  const { brandDetails: BRAND_DETAILS, addInquiry, openInstantEnquiry } = useData();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,13 +40,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.name && formData.phone) {
+      addInquiry({
+        fullName: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        serviceType: formData.serviceType,
+        itemTitle: formData.serviceType,
+        itemCategory: 'Financial Service',
+        paymentStatus: 'Paid (₹199)',
+        leadChannel: 'Website Form',
+        source: 'Contact Page',
+        message: formData.message || 'Paid online message submitted from Contact Us page.'
+      });
+    }
     setSubmitted(true);
   };
 
   const openDirectWhatsApp = () => {
-    const text = `Hi Saikiran, I submitted a contact message regarding ${formData.serviceType}. My Name: ${formData.name}, Phone: ${formData.phone}, Email: ${formData.email}. Message: ${formData.message || 'Please contact me.'}`;
+    const text = `Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I submitted a contact message regarding ${formData.serviceType}. My Name: ${formData.name}, Phone: ${formData.phone}, Email: ${formData.email}. Message: ${formData.message || 'Please contact me.'}`;
     window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
   };
+
 
   return (
     <div className="w-full">
@@ -81,22 +98,32 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
               {/* Prominent WhatsApp and Call buttons */}
               <div className="flex flex-wrap gap-3 pt-2">
-                <a
-                  href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to connect with Prime Funds Solutions regarding loan assistance.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-lg transition-transform active:scale-95"
+                <button
+                  type="button"
+                  onClick={() => openInstantEnquiry({
+                    itemTitle: 'Direct WhatsApp Helpline Inquiry',
+                    itemCategory: 'Financial Service',
+                    channel: 'WhatsApp',
+                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to connect with Prime Funds Solutions regarding loan assistance.`)
+                  })}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-lg transition-transform active:scale-95 cursor-pointer"
                 >
                   <WhatsAppIcon size={18} />
-                  <span>Instant WhatsApp (+91 9177886354)</span>
-                </a>
-                <a
-                  href={BRAND_DETAILS.callUrl}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#12245C] dark:bg-[#1E293B] hover:bg-[#0c1840] text-white font-bold text-xs border border-slate-700 shadow-lg transition-transform active:scale-95"
+                  <span>Instant WhatsApp ({BRAND_DETAILS.phone})</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openInstantEnquiry({
+                    itemTitle: 'Direct Call Consultation Helpline',
+                    itemCategory: 'Financial Service',
+                    channel: 'Call',
+                    targetUrl: BRAND_DETAILS.callUrl
+                  })}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#12245C] dark:bg-[#1E293B] hover:bg-[#0c1840] text-white font-bold text-xs border border-slate-700 shadow-lg transition-transform active:scale-95 cursor-pointer"
                 >
                   <PhoneCallIcon size={18} className="text-[#4FC3E0]" />
-                  <span>Direct Call (+91 9177886354)</span>
-                </a>
+                  <span>Direct Call ({BRAND_DETAILS.phone})</span>
+                </button>
               </div>
             </div>
 
@@ -355,15 +382,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="pt-2 border-t border-slate-700">
-                  <a
-                    href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to discuss a new loan application directly.")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition-transform active:scale-95"
+                  <button
+                    type="button"
+                    onClick={() => openInstantEnquiry({
+                      itemTitle: 'Direct Discussion on Loan / Property Application',
+                      itemCategory: 'Financial Service',
+                      channel: 'WhatsApp',
+                      targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to discuss a new loan application directly.")
+                    })}
+                    className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition-transform active:scale-95 cursor-pointer"
                   >
                     <WhatsAppIcon size={16} />
                     <span>Quick WhatsApp Connect</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

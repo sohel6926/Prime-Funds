@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { PageId } from '../types';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { WhatsAppIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { TypewriterHeading } from '../components/TypewriterHeading';
@@ -32,6 +32,8 @@ interface CalculatorPageProps {
 }
 
 export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate, onOpenApply }) => {
+  const { brandDetails: BRAND_DETAILS } = useData();
+
   // EMI Calculator Inputs
   const [loanAmount, setLoanAmount] = useState<number>(2500000); // 25 Lakhs
   const [interestRate, setInterestRate] = useState<number>(8.75); // 8.75%

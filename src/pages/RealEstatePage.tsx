@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { PageId, PropertyItem, PropertyClass } from '../types';
-import { PROPERTY_LISTINGS, REAL_ESTATE_CATEGORIES, TARGET_LOCATIONS } from '../data/realEstateData';
-import { BRAND_DETAILS } from '../data/contentData';
+import { REAL_ESTATE_CATEGORIES, TARGET_LOCATIONS } from '../data/realEstateData';
+import { useData } from '../context/DataContext';
 import { WhatsAppIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { TypewriterHeading } from '../components/TypewriterHeading';
@@ -131,6 +131,8 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
   onSelectProperty,
   onOpenApply
 }) => {
+  const { properties: PROPERTY_LISTINGS, brandDetails: BRAND_DETAILS, openInstantEnquiry } = useData();
+
   // Filter States
   const [selectedLocation, setSelectedLocation] = useState<string>('All');
   const [selectedClass, setSelectedClass] = useState<'All' | PropertyClass>('All');
@@ -846,15 +848,19 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
                 >
                   Reset All Filters
                 </button>
-                <a
-                  href={BRAND_DETAILS.whatsappUrl(`Hi Saikiran, I'm looking for properties in ${selectedLocation === 'All' ? 'Telangana' : selectedLocation} with budget around ${formatPriceLabel(maxPrice)}. Please share unlisted options.`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white text-xs font-bold shadow-lg transition-all"
+                <button
+                  type="button"
+                  onClick={() => openInstantEnquiry({
+                    itemTitle: `Offline Real Estate Inventory (${selectedLocation === 'All' ? 'Telangana' : selectedLocation})`,
+                    itemCategory: 'Real Estate Property',
+                    channel: 'WhatsApp',
+                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Saikiran, I'm looking for properties in ${selectedLocation === 'All' ? 'Telangana' : selectedLocation} with budget around ${formatPriceLabel(maxPrice)}. Please share unlisted options.`)
+                  })}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white text-xs font-bold shadow-lg transition-all cursor-pointer"
                 >
                   <WhatsAppIcon size={16} />
                   <span>Ask on WhatsApp for Offline Deals</span>
-                </a>
+                </button>
               </div>
             </div>
           ) : (
@@ -956,15 +962,19 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
                             <span>View Details & Loan</span>
                             <ArrowRight className="w-3.5 h-3.5" />
                           </button>
-                          <a
-                            href={BRAND_DETAILS.whatsappUrl(property.whatsappMessage)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2.5 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white transition-all duration-200 flex-shrink-0 shadow-sm"
+                          <button
+                            type="button"
+                            onClick={() => openInstantEnquiry({
+                              itemTitle: property.title,
+                              itemCategory: 'Real Estate Property',
+                              channel: 'WhatsApp',
+                              targetUrl: BRAND_DETAILS.whatsappUrl(property.whatsappMessage)
+                            })}
+                            className="p-2.5 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white transition-all duration-200 flex-shrink-0 shadow-sm cursor-pointer"
                             title="WhatsApp Property Specialist"
                           >
                             <WhatsAppIcon size={16} />
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1137,15 +1147,19 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
             From 150 Sq.Yd plots in Karimnagar & Hanamkonda to 50-Acre agriculture lands in Mancherial, Siricilla, Peddapalli & Siddipet — we match you with verified properties.
           </p>
           <div className="flex flex-col sm:flex-row gap-3.5 justify-center pt-2">
-            <a
-              href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to buy a property in Telangana. Please share available options.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white font-bold text-sm shadow-xl transition-all active:scale-95"
+            <button
+              type="button"
+              onClick={() => openInstantEnquiry({
+                itemTitle: 'Telangana Real Estate Consultation & Off-Market Deals',
+                itemCategory: 'Real Estate Property',
+                channel: 'WhatsApp',
+                targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to buy a property in Telangana. Please share available options.")
+              })}
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white font-bold text-sm shadow-xl transition-all active:scale-95 cursor-pointer"
             >
               <WhatsAppIcon size={18} />
               <span>Chat on WhatsApp</span>
-            </a>
+            </button>
             <button
               onClick={() => onOpenApply('Property Purchase & Home Loan')}
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm shadow-xl transition-all active:scale-95"

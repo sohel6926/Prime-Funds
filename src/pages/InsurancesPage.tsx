@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
-import { LIFE_INSURANCES, GENERAL_INSURANCES, GOV_SCHEME_INFO } from '../data/insuranceData';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { DynamicIcon, WhatsAppIcon, PhoneCallIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { TypewriterHeading } from '../components/TypewriterHeading';
@@ -30,7 +29,15 @@ interface InsurancesPageProps {
 }
 
 export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOpenApply }) => {
+  const {
+    lifeInsurances: LIFE_INSURANCES,
+    generalInsurances: GENERAL_INSURANCES,
+    govSchemes: GOV_SCHEME_INFO,
+    brandDetails: BRAND_DETAILS,
+    openInstantEnquiry
+  } = useData();
   const [activeTab, setActiveTab] = useState<'all' | 'life' | 'general'>('all');
+
 
   return (
     <div className="w-full">
@@ -74,15 +81,19 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
                 >
                   Get Instant Insurance Quote
                 </button>
-                <a
-                  href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to compare insurance policies for my family.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-[#12245C] dark:text-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2 bg-white/60 dark:bg-transparent backdrop-blur-sm"
+                <button
+                  type="button"
+                  onClick={() => openInstantEnquiry({
+                    itemTitle: 'Insurance Comparison & Advisory Consultation',
+                    itemCategory: 'Insurance Plan',
+                    channel: 'WhatsApp',
+                    targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to compare insurance policies for my family.")
+                  })}
+                  className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-[#12245C] dark:text-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2 bg-white/60 dark:bg-transparent backdrop-blur-sm cursor-pointer"
                 >
                   <WhatsAppIcon size={16} />
                   <span>WhatsApp Advisory</span>
-                </a>
+                </button>
               </div>
             </div>
 
@@ -217,22 +228,32 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
                       {/* WhatsApp + Call with type-specific messages */}
                       <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
                         <div className="grid grid-cols-2 gap-2">
-                          <a
-                            href={BRAND_DETAILS.whatsappUrl(plan.whatsappMessage)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow-sm hover:shadow active:scale-95 transition-all"
+                          <button
+                            type="button"
+                            onClick={() => openInstantEnquiry({
+                              itemTitle: plan.title,
+                              itemCategory: 'Life Insurance',
+                              channel: 'WhatsApp',
+                              targetUrl: BRAND_DETAILS.whatsappUrl(plan.whatsappMessage)
+                            })}
+                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer"
                           >
                             <WhatsAppIcon size={16} />
                             <span>WhatsApp</span>
-                          </a>
-                          <a
-                            href={BRAND_DETAILS.callUrl}
-                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-[#12245C] dark:hover:border-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-700 text-[#12245C] dark:text-slate-200 text-xs font-bold shadow-sm active:scale-95 transition-all"
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => openInstantEnquiry({
+                              itemTitle: plan.title,
+                              itemCategory: 'Life Insurance',
+                              channel: 'Call',
+                              targetUrl: BRAND_DETAILS.callUrl
+                            })}
+                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-[#12245C] dark:hover:border-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-700 text-[#12245C] dark:text-slate-200 text-xs font-bold shadow-sm active:scale-95 transition-all cursor-pointer"
                           >
                             <PhoneCallIcon size={15} />
                             <span>Call</span>
-                          </a>
+                          </button>
                         </div>
                         <button
                           onClick={() => onOpenApply(plan.title)}
@@ -316,22 +337,32 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
 
                       <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
                         <div className="grid grid-cols-2 gap-2">
-                          <a
-                            href={BRAND_DETAILS.whatsappUrl(plan.whatsappMessage)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow-sm hover:shadow active:scale-95 transition-all"
+                          <button
+                            type="button"
+                            onClick={() => openInstantEnquiry({
+                              itemTitle: plan.title,
+                              itemCategory: 'General / Health Insurance',
+                              channel: 'WhatsApp',
+                              targetUrl: BRAND_DETAILS.whatsappUrl(plan.whatsappMessage)
+                            })}
+                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer"
                           >
                             <WhatsAppIcon size={16} />
                             <span>WhatsApp</span>
-                          </a>
-                          <a
-                            href={BRAND_DETAILS.callUrl}
-                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-[#12245C] dark:hover:border-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-700 text-[#12245C] dark:text-slate-200 text-xs font-bold shadow-sm active:scale-95 transition-all"
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => openInstantEnquiry({
+                              itemTitle: plan.title,
+                              itemCategory: 'General / Health Insurance',
+                              channel: 'Call',
+                              targetUrl: BRAND_DETAILS.callUrl
+                            })}
+                            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-[#12245C] dark:hover:border-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-700 text-[#12245C] dark:text-slate-200 text-xs font-bold shadow-sm active:scale-95 transition-all cursor-pointer"
                           >
                             <PhoneCallIcon size={15} />
                             <span>Call</span>
-                          </a>
+                          </button>
                         </div>
                         <button
                           onClick={() => onOpenApply(plan.title)}
@@ -367,14 +398,18 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
                 </p>
               </div>
             </div>
-            <a
-              href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to know about enrolling in Government Social Security insurance schemes like PMSBY/PMJJBY.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-shrink-0 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow transition-all active:scale-95"
+            <button
+              type="button"
+              onClick={() => openInstantEnquiry({
+                itemTitle: 'Government Social Security Schemes (PMSBY / PMJJBY)',
+                itemCategory: 'Insurance Plan',
+                channel: 'WhatsApp',
+                targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to know about enrolling in Government Social Security insurance schemes like PMSBY/PMJJBY.")
+              })}
+              className="flex-shrink-0 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow transition-all active:scale-95 cursor-pointer"
             >
               Inquire Gov Schemes
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -397,15 +432,19 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
               Don’t settle for generic insurance plans. Speak with Saikiran.V to evaluate claim settlement ratios, cashless network hospitals, and optimal deductible limits.
             </p>
             <div className="flex justify-center gap-4 pt-3">
-              <a
-                href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, please help me compare health and life insurance plans.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-md transition-all active:scale-95"
+              <button
+                type="button"
+                onClick={() => openInstantEnquiry({
+                  itemTitle: 'Unbiased Health & Life Insurance Portfolio Comparison',
+                  itemCategory: 'Insurance Plan',
+                  channel: 'WhatsApp',
+                  targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, please help me compare health and life insurance plans.")
+                })}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-md transition-all active:scale-95 cursor-pointer"
               >
                 <WhatsAppIcon size={16} />
                 <span>Chat with Insurance Expert</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>

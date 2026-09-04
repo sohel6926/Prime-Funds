@@ -2,7 +2,7 @@ import React from 'react';
 import { PageId } from '../types';
 import { BrandLogo } from './BrandLogos';
 import { WhatsAppIcon, PhoneCallIcon, EmailIcon } from './BrandIcons';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { MapPin, Phone, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 import { DotGridPattern } from './BackgroundPatterns';
 
@@ -17,10 +17,13 @@ export const Footer: React.FC<FooterProps> = ({
   isDark,
   onOpenApply
 }) => {
+  const { brandDetails: BRAND_DETAILS } = useData();
+
   const handleNav = (page: PageId) => {
     onNavigate(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
 
   return (
     <footer className="w-full bg-[#0B1220] text-white border-t border-[#2A3550] relative overflow-hidden">
@@ -67,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({
             {/* Real Brand-Style Contact Icons */}
             <div className="flex items-center gap-3 pt-2">
               <a
-                href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to inquire about your loans and insurance facilitation services.")}
+                href={BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to inquire about your loans and insurance facilitation services.`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact via WhatsApp"
@@ -274,6 +277,7 @@ export const Footer: React.FC<FooterProps> = ({
             >
               Terms & Conditions
             </button>
+
           </div>
         </div>
       </div>

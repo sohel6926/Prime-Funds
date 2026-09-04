@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PageId, PropertyItem } from '../types';
-import { PROPERTY_LISTINGS } from '../data/realEstateData';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { WhatsAppIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import {
@@ -40,17 +39,35 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   onSelectProperty,
   onOpenApply
 }) => {
+  const { properties, brandDetails: BRAND_DETAILS, openInstantEnquiry, addInquiry } = useData();
+
   const property: PropertyItem =
-    PROPERTY_LISTINGS.find(p => p.id === propertyId) || PROPERTY_LISTINGS[0];
+    properties.find(p => p.id === propertyId) || properties[0];
+
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [formData, setFormData] = useState({ name: '', phone: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const relatedProperties = PROPERTY_LISTINGS.filter(p => p.id !== property.id).slice(0, 3);
+  const relatedProperties = properties.filter(p => p.id !== property.id).slice(0, 3);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.name && formData.phone) {
+      addInquiry({
+        fullName: formData.name.trim(),
+        phone: formData.phone.trim(),
+        serviceType: `Property Inquiry - ${property.title}`,
+        itemTitle: property.title,
+        itemCategory: 'Real Estate Property',
+        paymentStatus: 'No Payment (Redirected)',
+        leadChannel: 'WhatsApp',
+        city: property.city,
+        propertyId: property.id,
+        source: 'Property Inquiry',
+        message: `Inquired on property detail page for: ${property.title}. Free WhatsApp redirect.`
+      });
+    }
     const text = `Hi Saikiran! I'm interested in *${property.title}* (${property.location}). My name is ${formData.name} and my phone number is ${formData.phone}. Please share full details.`;
     window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
     setSubmitted(true);
@@ -314,15 +331,19 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
               {/* Primary CTA */}
               <div className="pt-2 space-y-2">
-                <a
-                  href={BRAND_DETAILS.whatsappUrl(property.whatsappMessage)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white font-bold text-sm shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95"
+                <button
+                  type="button"
+                  onClick={() => openInstantEnquiry({
+                    itemTitle: property.title,
+                    itemCategory: 'Real Estate Property',
+                    channel: 'WhatsApp',
+                    targetUrl: BRAND_DETAILS.whatsappUrl(property.whatsappMessage)
+                  })}
+                  className="w-full py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white font-bold text-sm shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
                 >
                   <WhatsAppIcon size={18} />
                   <span>WhatsApp Enquiry</span>
-                </a>
+                </button>
                 <button
                   onClick={() => onOpenApply(`Enquiry: ${property.title}`)}
                   className="w-full py-3.5 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95"
@@ -392,15 +413,19 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               <p className="text-xs text-slate-600 dark:text-slate-400 mb-3">
                 We arrange free cab pickup & drop for property site visits. See it before you decide.
               </p>
-              <a
-                href={BRAND_DETAILS.whatsappUrl(`Hi Saikiran, I want to book a FREE site visit for *${property.title}* in ${property.location}. Please share available dates.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all active:scale-95"
+              <button
+                type="button"
+                onClick={() => openInstantEnquiry({
+                  itemTitle: `Site Visit: ${property.title} (${property.location})`,
+                  itemCategory: 'Real Estate Property',
+                  channel: 'WhatsApp',
+                  targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Saikiran, I want to book a FREE site visit for *${property.title}* in ${property.location}. Please share available dates.`)
+                })}
+                className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
               >
                 <WhatsAppIcon size={14} />
                 Book Site Visit
-              </a>
+              </button>
             </div>
           </div>
         </div>

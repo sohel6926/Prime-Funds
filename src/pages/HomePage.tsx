@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
-import { LOAN_SERVICES } from '../data/loansData';
-import { PROPERTY_LISTINGS } from '../data/realEstateData';
-import { HOME_TRUST_POINTS, HOME_TEASERS, BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { DynamicIcon, WhatsAppIcon, PhoneCallIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { TypewriterHeading } from '../components/TypewriterHeading';
@@ -38,6 +36,8 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onSelectProperty }) => {
+  const { loans, properties, trustPoints, teasers, brandDetails, addInquiry } = useData();
+
   // Quick Enquiry Form State
   const [formData, setFormData] = useState({
     name: '',
@@ -49,16 +49,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onS
 
   const handleEnquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.name && formData.phone) {
+      addInquiry({
+        fullName: formData.name,
+        phone: formData.phone,
+        serviceType: formData.serviceType,
+        loanAmount: formData.loanAmount,
+        source: 'Apply Modal',
+        message: `Quick enquiry from Home Page for ${formData.serviceType} of amount ${formData.loanAmount}.`
+      });
+    }
     setEnquirySent(true);
   };
 
   const openWhatsAppEnquiry = () => {
-    const text = `Hi Saikiran, I submitted a quick enquiry for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.name}, Phone: ${formData.phone}.`;
-    window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
+    const text = `Hi ${brandDetails.contactPerson || 'Saikiran'}, I submitted a quick enquiry for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.name}, Phone: ${formData.phone}.`;
+    window.open(brandDetails.whatsappUrl(text), '_blank');
   };
 
   // Preview max 6 services
-  const previewServices = LOAN_SERVICES.slice(0, 6);
+  const previewServices = loans.slice(0, 6);
+  // Featured properties (fallback to first 3 if none marked featured)
+  const featuredProperties = properties.filter(p => p.featured).length > 0
+    ? properties.filter(p => p.featured).slice(0, 3)
+    : properties.slice(0, 3);
+
 
   return (
     <div className="w-full">
@@ -252,7 +267,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onS
 
           {/* 3 Featured Property Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {PROPERTY_LISTINGS.filter(p => p.featured).slice(0, 3).map((property, idx) => (
+            {featuredProperties.map((property, idx) => (
               <ScrollReveal key={property.id} delay={idx * 80}>
                 <div className="group h-full flex flex-col justify-between rounded-2xl bg-slate-50 dark:bg-[#151E32] border-2 border-slate-200 dark:border-slate-700/80 hover:border-[#F5822C] dark:hover:border-[#F5822C] shadow-sm hover:shadow-xl hover:shadow-[#F5822C]/10 transition-all duration-300 overflow-hidden hover:-translate-y-1.5">
                   <div
@@ -312,7 +327,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onS
                     <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
                       <div className="flex items-center gap-2 text-xs text-[#F5822C] font-semibold">
                         <Landmark className="w-3.5 h-3.5" />
-                        <span>Pre-Approved Loan: {property.eligibleLoans[0]?.interestRate || '8.35%'}</span>
+                        <span>Pre-Approved Loan: {property.eligibleLoans?.[0]?.interestRate || '8.35%'}</span>
                       </div>
                       <button
                         onClick={() => {
@@ -356,7 +371,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onS
               onClick={() => onNavigate('services')}
               className="inline-flex items-center gap-2 text-sm font-bold text-[#F5822C] hover:text-[#e0711f] group"
             >
-              <span>View All 11 Loan Types</span>
+              <span>View All Loan Types</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -425,7 +440,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onS
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {HOME_TRUST_POINTS.map((point, idx) => (
+            {trustPoints.map((point, idx) => (
               <ScrollReveal key={point.id} delay={idx * 100}>
                 <div className="group flex items-start gap-3.5 p-5 rounded-2xl bg-white/95 dark:bg-[#151E32]/95 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 md:hover:border-[#F5822C] md:dark:hover:border-[#F5822C] shadow-sm md:hover:shadow-xl md:hover:shadow-[#F5822C]/10 md:hover:-translate-y-1 transition-all duration-300 h-full">
                   <div className="w-10 h-10 rounded-xl bg-[#F5822C]/10 md:group-hover:bg-[#F5822C] text-[#F5822C] md:group-hover:text-white flex items-center justify-center flex-shrink-0 transition-colors duration-300">
@@ -466,7 +481,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onS
 
           {/* Exactly ONE row of compact teaser cards for About Us, Insurances, Loan Calculator, Contact Us */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {HOME_TEASERS.map((teaser, index) => (
+            {teasers.map((teaser, index) => (
               <ScrollReveal key={teaser.id} delay={index * 90}>
                 <div className="group h-full bg-white dark:bg-[#151E32] rounded-2xl border-2 border-slate-200 dark:border-slate-700 md:hover:border-[#3FB6D3] md:dark:hover:border-[#3FB6D3] overflow-hidden shadow-sm md:hover:shadow-2xl md:hover:shadow-[#3FB6D3]/15 md:dark:hover:shadow-[#3FB6D3]/20 md:hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between backdrop-blur-sm">
                   <div className="relative h-36 overflow-hidden">

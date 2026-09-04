@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
-import { PRIVACY_POLICY_SECTIONS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { ShieldCheck, ArrowLeft, Lock } from 'lucide-react';
 
 interface PrivacyPolicyPageProps {
@@ -8,6 +8,8 @@ interface PrivacyPolicyPageProps {
 }
 
 export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => {
+  const { privacySections: PRIVACY_POLICY_SECTIONS } = useData();
+
   return (
     <div className="w-full py-12 bg-white dark:bg-[#0B1220]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

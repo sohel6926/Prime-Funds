@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, Shield, ArrowRight, ShieldCheck } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 
 interface ApplyModalProps {
   isOpen: boolean;
@@ -15,6 +15,8 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
   onClose,
   defaultService = 'Personal Loan'
 }) => {
+  const { brandDetails: BRAND_DETAILS, addInquiry } = useData();
+
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -32,16 +34,38 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.fullName && formData.phone) {
+      const isIns = formData.serviceType.toLowerCase().includes('insurance');
+      const isProp = formData.serviceType.toLowerCase().includes('property');
+      const itemCategory = isIns ? 'Insurance Plan' : (isProp ? 'Real Estate Property' : 'Loan Product');
+
+      addInquiry({
+        fullName: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        serviceType: formData.serviceType,
+        itemTitle: formData.serviceType,
+        itemCategory,
+        paymentStatus: 'Paid (₹199)',
+        leadChannel: 'Website Form',
+        loanAmount: formData.loanAmount,
+        employmentType: formData.employmentType,
+        city: formData.city,
+        message: formData.message || `Online application submitted with ₹199 consultation fee for ${formData.serviceType}.`,
+        source: 'Apply Modal'
+      });
+    }
     setSubmitted(true);
   };
 
   const openWhatsAppDirect = () => {
-    let text = `Hi Saikiran, I want to apply for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.fullName}, Phone: ${formData.phone}`;
+    let text = `Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to apply for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.fullName}, Phone: ${formData.phone}`;
     if (formData.email) text += `, Email: ${formData.email}`;
     if (formData.employmentType) text += `, Employment: ${formData.employmentType}`;
     if (formData.message) text += `, Message: ${formData.message}`;
     window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
   };
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">

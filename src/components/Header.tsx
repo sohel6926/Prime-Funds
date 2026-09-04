@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X, ArrowRight, Phone } from 'lucide-react';
 import { PageId } from '../types';
 import { BrandLogo } from './BrandLogos';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -19,8 +19,10 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleTheme,
   onOpenApply
 }) => {
+  const { brandDetails: BRAND_DETAILS } = useData();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,6 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="font-semibold">{BRAND_DETAILS.phone}</span>
               <span className="text-slate-400">({BRAND_DETAILS.contactPerson})</span>
             </a>
+
           </div>
         </div>
       </div>

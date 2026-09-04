@@ -1,4 +1,4 @@
-import { TrustPoint, QuickTeaser } from '../types';
+import { TrustPoint, QuickTeaser, AboutPageData } from '../types';
 
 export const BRAND_DETAILS = {
   name: 'Prime Funds Solutions Pvt. Ltd.',
@@ -191,3 +191,81 @@ export const TERMS_CONDITIONS_SECTIONS = [
     content: 'For questions, official notices, or legal inquiries concerning these Terms and Conditions, please contact our corporate liaison Saikiran.V at +91 9177886354 or via email at contact@primefundssolutions.com.'
   }
 ];
+
+export const DEFAULT_ABOUT_CONTENT: AboutPageData = {
+  hero: {
+    badge: 'About Prime Funds Solutions',
+    animatingPhrases: [
+      "India’s Integrated Real Estate & Financial Facilitator",
+      "Dedicated Advisory Led by Saikiran.V & Team",
+      "Empowering 18,000+ Borrowers & Property Buyers"
+    ],
+    description: 'Prime Funds Solutions Pvt. Ltd. is a premier Indian financial & real estate consultancy dedicated to simplifying property acquisition, retail and commercial loans, and comprehensive asset insurance. We guide clients through every stage—from handpicking vetted properties to securing bank loan sanctions across 40+ leading institutions and shielding assets with robust coverage.'
+  },
+  coreCapabilities: {
+    badge: 'Core Capabilities',
+    heading: 'Our 3-in-1 Integrated Service Ecosystem',
+    subtitle: 'Eliminate coordination friction. We unite property discovery, bank loan approvals, and asset protection under a single trusted advisory.',
+    pillars: [
+      {
+        id: 'cap-realestate',
+        iconName: 'Building2',
+        title: '1. Real Estate & Properties',
+        description: 'Curated inventory of verified open plots, independent houses, G+1 duplex homes, and apartment flats with up to 90% pre-approved bank loans and 0% buyer brokerage.',
+        bulletPoints: [
+          '100% Verified Titles & RERA Compliance',
+          'Direct Builder Rates with Zero Markups'
+        ],
+        buttonText: 'Browse Properties',
+        buttonTarget: 'realestate'
+      },
+      {
+        id: 'cap-loans',
+        iconName: 'Landmark',
+        title: '2. Loan Financing (40+ Banks)',
+        description: 'Personal, home, mortgage, business, and vehicle credit from premier institutions (HDFC, SBI, ICICI, Axis, Kotak) with up to 90% funding and lowest interest rates.',
+        bulletPoints: [
+          'Instant Sanction in 24 to 48 Hours',
+          'Single-Window Doorstep Documentation'
+        ],
+        buttonText: 'Explore Loan Schemes',
+        buttonTarget: 'services'
+      },
+      {
+        id: 'cap-insurances',
+        iconName: 'ShieldCheck',
+        title: '3. Insurance Protection',
+        description: 'Protecting structural assets, commercial spaces, vehicles, health, and family financial security with term life plans and mortgage loan coverage shields.',
+        bulletPoints: [
+          'Property Structure & Fire Perils Cover',
+          '100% Cashless Medical & Motor Claims'
+        ],
+        buttonText: 'View Insurance Plans',
+        buttonTarget: 'insurances'
+      }
+    ]
+  },
+  missionVision: {
+    missionTitle: 'Our Mission',
+    missionDescription: 'To democratize access to transparent credit and verified real estate across India by offering personalized loan comparisons, legal property vetting, and expert advisory that saves our clients time and capital.',
+    missionTagline: 'Client-Centric • Fast-Track Approvals • Complete Integrity',
+    visionTitle: 'Our Vision',
+    visionDescription: 'To become the most trusted national household name for integrated real estate, loans, and insurance facilitation, renowned for unparalleled lending partnerships and superior advisory satisfaction.',
+    visionTagline: 'Pan-India Reach • 40+ Bank Network • Seamless Digital Journey'
+  },
+  distinctAdvantage: {
+    badge: 'Our Distinct Advantage',
+    heading: 'Why Work With Prime Funds Solutions',
+    imageUrl: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80',
+    imageBadge: 'Dedicated Leadership',
+    imageCaption: 'Personalized guidance led by Saikiran.V and our team of senior finance & real estate specialists.'
+  },
+  trackRecord: {
+    heading: 'Proven Track Record of Facilitation',
+    subtitle: 'Our financial and property metrics reflect consistent trust, rapid disbursements, and client satisfaction.',
+    ctaHeading: 'Ready to explore properties or loan solutions?',
+    ctaSubtitle: 'Contact our senior facilitator Saikiran.V directly or submit a quick application.',
+    ctaButtonText: 'WhatsApp Advisory'
+  }
+};
+

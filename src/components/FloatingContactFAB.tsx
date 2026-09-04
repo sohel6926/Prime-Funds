@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X } from 'lucide-react';
 import { WhatsAppIcon, PhoneCallIcon, EmailIcon } from './BrandIcons';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 
 export const FloatingContactFAB: React.FC = () => {
+  const { brandDetails: BRAND_DETAILS } = useData();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -25,8 +26,8 @@ export const FloatingContactFAB: React.FC = () => {
     {
       id: 'fab-whatsapp',
       label: 'WhatsApp Chat',
-      sublabel: '+91 9177886354',
-      href: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to inquire about loans and financial services."),
+      sublabel: BRAND_DETAILS.phone,
+      href: BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to inquire about loans and financial services.`),
       bgColor: 'bg-[#25D366] hover:bg-[#20bd5a] text-white',
       icon: <WhatsAppIcon size={20} className="w-5 h-5" />,
       delay: 'delay-[100ms]'
@@ -34,7 +35,7 @@ export const FloatingContactFAB: React.FC = () => {
     {
       id: 'fab-call',
       label: 'Direct Phone Call',
-      sublabel: '+91 9177886354',
+      sublabel: BRAND_DETAILS.phone,
       href: BRAND_DETAILS.callUrl,
       bgColor: 'bg-[#12245C] dark:bg-[#1E293B] hover:bg-[#0c1840] text-white border border-slate-700',
       icon: <PhoneCallIcon size={19} className="w-5 h-5 text-[#4FC3E0]" />,

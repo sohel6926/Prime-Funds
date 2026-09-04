@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
-import { LOAN_SERVICES } from '../data/loansData';
-import { BRAND_DETAILS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { DynamicIcon, WhatsAppIcon, PhoneCallIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { TypewriterHeading } from '../components/TypewriterHeading';
@@ -28,6 +27,7 @@ interface ServicesPageProps {
 }
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenApply }) => {
+  const { loans: LOAN_SERVICES, brandDetails: BRAND_DETAILS, openInstantEnquiry } = useData();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   const categories = ['All', 'Personal', 'Property', 'Business', 'Specialized'];
@@ -36,6 +36,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenAp
     selectedCategory === 'All'
       ? LOAN_SERVICES
       : LOAN_SERVICES.filter(item => item.category === selectedCategory);
+
 
   return (
     <div className="w-full">
@@ -203,24 +204,34 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenAp
                     <div className="pt-5 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
                       <div className="grid grid-cols-2 gap-2">
                         {/* Working WhatsApp button with unique message */}
-                        <a
-                          href={BRAND_DETAILS.whatsappUrl(service.whatsappMessage)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow-sm hover:shadow active:scale-95 transition-all"
+                        <button
+                          type="button"
+                          onClick={() => openInstantEnquiry({
+                            itemTitle: service.title,
+                            itemCategory: 'Loan Product',
+                            channel: 'WhatsApp',
+                            targetUrl: BRAND_DETAILS.whatsappUrl(service.whatsappMessage)
+                          })}
+                          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer"
                         >
                           <WhatsAppIcon size={16} />
                           <span>WhatsApp</span>
-                        </a>
+                        </button>
 
                         {/* Working Call button */}
-                        <a
-                          href={BRAND_DETAILS.callUrl}
-                          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-[#12245C] dark:hover:border-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-700 text-[#12245C] dark:text-slate-200 text-xs font-bold shadow-sm active:scale-95 transition-all"
+                        <button
+                          type="button"
+                          onClick={() => openInstantEnquiry({
+                            itemTitle: service.title,
+                            itemCategory: 'Loan Product',
+                            channel: 'Call',
+                            targetUrl: BRAND_DETAILS.callUrl
+                          })}
+                          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-[#12245C] dark:hover:border-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-700 text-[#12245C] dark:text-slate-200 text-xs font-bold shadow-sm active:scale-95 transition-all cursor-pointer"
                         >
                           <PhoneCallIcon size={15} />
                           <span>Call Advisor</span>
-                        </a>
+                        </button>
                       </div>
 
                       {/* Primary Apply Button */}
@@ -256,25 +267,35 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenAp
                 Need Help Choosing the Right Loan Structure?
               </h2>
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                Connect directly with Saikiran.V at +91 9177886354 for a confidential loan eligibility audit and personalized bank rate negotiation.
+                Connect directly with {BRAND_DETAILS.contactPerson || 'Saikiran.V'} at {BRAND_DETAILS.phone} for a confidential loan eligibility audit and personalized bank rate negotiation.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">
-                <a
-                  href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I need help selecting the best loan for my profile. Please guide me.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-lg transition-transform active:scale-95"
+                <button
+                  type="button"
+                  onClick={() => openInstantEnquiry({
+                    itemTitle: 'Confidential Loan Eligibility Consultation',
+                    itemCategory: 'Loan Product',
+                    channel: 'WhatsApp',
+                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I need help selecting the best loan for my profile. Please guide me.`)
+                  })}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-lg transition-transform active:scale-95 cursor-pointer"
                 >
                   <WhatsAppIcon size={18} />
                   <span>Start WhatsApp Consultation</span>
-                </a>
-                <a
-                  href={BRAND_DETAILS.callUrl}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs shadow-lg transition-all"
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openInstantEnquiry({
+                    itemTitle: 'Confidential Loan Eligibility Consultation',
+                    itemCategory: 'Loan Product',
+                    channel: 'Call',
+                    targetUrl: BRAND_DETAILS.callUrl
+                  })}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs shadow-lg transition-all cursor-pointer"
                 >
                   <Phone className="w-4 h-4 text-[#F5822C]" />
-                  <span>Call +91 9177886354</span>
-                </a>
+                  <span>Call {BRAND_DETAILS.phone}</span>
+                </button>
               </div>
             </div>
           </div>

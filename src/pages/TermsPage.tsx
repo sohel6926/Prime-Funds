@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
-import { TERMS_CONDITIONS_SECTIONS } from '../data/contentData';
+import { useData } from '../context/DataContext';
 import { FileText, ArrowLeft, Scale } from 'lucide-react';
 
 interface TermsPageProps {
@@ -8,6 +8,8 @@ interface TermsPageProps {
 }
 
 export const TermsPage: React.FC<TermsPageProps> = ({ onNavigate }) => {
+  const { termsSections: TERMS_CONDITIONS_SECTIONS } = useData();
+
   return (
     <div className="w-full py-12 bg-white dark:bg-[#0B1220]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
