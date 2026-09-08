@@ -386,6 +386,24 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
             </div>
             <div>
               <label className="block font-bold text-slate-700 dark:text-slate-200 mb-1">
+                Numeric Price (in ₹) *
+                <span className="ml-1 text-[10px] font-normal text-orange-400">Used by search filters</span>
+              </label>
+              <input
+                type="number"
+                required
+                min="0"
+                value={formData.numericPrice ?? ''}
+                onChange={e => setFormData({ ...formData, numericPrice: Number(e.target.value) })}
+                placeholder="e.g. 2500000 (for ₹25 Lakhs)"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-orange-400/60 dark:border-orange-400/40 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#F5822C] outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Rate Per Sq.Ft / Sq.Yd
               </label>
               <input
@@ -398,7 +416,7 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div>
               <label className="block font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Area Text
@@ -410,6 +428,35 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
                 placeholder="e.g. 200 Sq.Yards"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#F5822C] outline-none"
               />
+            </div>
+            <div>
+              <label className="block font-bold text-slate-700 dark:text-slate-200 mb-1">
+                Numeric Area
+                <span className="ml-1 text-[10px] font-normal text-orange-400">Used by filters</span>
+              </label>
+              <input
+                type="number"
+                min="0"
+                value={formData.numericArea ?? ''}
+                onChange={e => setFormData({ ...formData, numericArea: Number(e.target.value) })}
+                placeholder="e.g. 200"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-orange-400/60 dark:border-orange-400/40 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#F5822C] outline-none"
+              />
+            </div>
+            <div>
+              <label className="block font-bold text-slate-700 dark:text-slate-200 mb-1">
+                Area Unit
+                <span className="ml-1 text-[10px] font-normal text-orange-400">Used by filters</span>
+              </label>
+              <select
+                value={formData.areaUnit || 'sq.yrds'}
+                onChange={e => setFormData({ ...formData, areaUnit: e.target.value as 'sq.yrds' | 'acres' | 'sq.ft' })}
+                className="w-full px-3.5 py-2.5 rounded-xl border border-orange-400/60 dark:border-orange-400/40 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#F5822C] outline-none"
+              >
+                <option value="sq.yrds">Sq. Yards</option>
+                <option value="sq.ft">Sq. Feet</option>
+                <option value="acres">Acres</option>
+              </select>
             </div>
             <div>
               <label className="block font-bold text-slate-700 dark:text-slate-200 mb-1">

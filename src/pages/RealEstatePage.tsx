@@ -208,7 +208,8 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
       }
 
       // 4. Price Filter (₹10 Lakhs - ₹5 Cr)
-      if (property.numericPrice < minPrice || property.numericPrice > maxPrice) {
+      // Allow numericPrice === 0 (unset) so newly added properties are not hidden
+      if (property.numericPrice > 0 && (property.numericPrice < minPrice || property.numericPrice > maxPrice)) {
         return false;
       }
 
@@ -248,6 +249,7 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
       return 0;
     });
   }, [
+    PROPERTY_LISTINGS,
     selectedLocation,
     selectedClass,
     selectedType,
