@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { InsuranceItem } from '../../../types';
-import { X, Upload, XCircle } from 'lucide-react';
+import { X, Upload, XCircle, Loader2 } from 'lucide-react';
+import { uploadImage } from '../../../services/api';
 
 interface AdminInsuranceModalProps {
   isOpen: boolean;
@@ -42,15 +43,22 @@ export const AdminInsuranceModal: React.FC<AdminInsuranceModalProps> = ({
     }
   }, []);
 
-  const handleImageFile = (files: FileList | null) => {
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleImageFile = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
     if (!file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      if (ev.target?.result) setUploadedImage(ev.target.result as string);
-    };
-    reader.readAsDataURL(file);
+    setIsUploading(true);
+    try {
+      const url = await uploadImage(file, 'insurances');
+      setUploadedImage(url);
+    } catch (err) {
+      console.error('Image upload failed:', err);
+      alert('Image upload failed. Please check your connection and try again.');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   useEffect(() => {

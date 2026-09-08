@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ServiceItem } from '../../../types';
-import { X, Upload, XCircle } from 'lucide-react';
+import { X, Upload, XCircle, Loader2 } from 'lucide-react';
+import { uploadImage } from '../../../services/api';
 
 interface AdminLoanModalProps {
   isOpen: boolean;
@@ -49,15 +50,22 @@ export const AdminLoanModal: React.FC<AdminLoanModalProps> = ({
     }
   }, []);
 
-  const handleImageFile = (files: FileList | null) => {
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleImageFile = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
     if (!file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      if (ev.target?.result) setUploadedImage(ev.target.result as string);
-    };
-    reader.readAsDataURL(file);
+    setIsUploading(true);
+    try {
+      const url = await uploadImage(file, 'loans');
+      setUploadedImage(url);
+    } catch (err) {
+      console.error('Image upload failed:', err);
+      alert('Image upload failed. Please check your connection and try again.');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   useEffect(() => {
@@ -230,12 +238,19 @@ export const AdminLoanModal: React.FC<AdminLoanModalProps> = ({
               Loan Service Image
             </label>
             <div
-              onClick={() => fileInputRef.current?.click()}
+              onClick={() => !isUploading && fileInputRef.current?.click()}
               onDragOver={e => e.preventDefault()}
               onDrop={e => { e.preventDefault(); handleImageFile(e.dataTransfer.files); }}
-              className="border-2 border-dashed border-[#E5E9F2] dark:border-[#2A3550] rounded-xl p-4 flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-[#F5822C] hover:bg-orange-50/40 dark:hover:bg-orange-950/10 transition-colors"
+              className={`border-2 border-dashed border-[#E5E9F2] dark:border-[#2A3550] rounded-xl p-4 flex flex-col items-center justify-center gap-2 transition-colors ${
+                isUploading ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-[#F5822C] hover:bg-orange-50/40 dark:hover:bg-orange-950/10'
+              }`}
             >
-              {uploadedImage ? (
+              {isUploading ? (
+                <>
+                  <Loader2 className="w-6 h-6 text-[#F5822C] animate-spin" />
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Uploading to Cloudinary...</p>
+                </>
+              ) : uploadedImage ? (
                 <div className="relative w-full">
                   <img src={uploadedImage} alt="Preview" className="w-full h-28 object-cover rounded-lg" />
                   <button

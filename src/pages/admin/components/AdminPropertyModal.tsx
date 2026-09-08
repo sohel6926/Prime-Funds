@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { PropertyItem, PropertyCategory, PropertyClass } from '../../../types';
-import { X, Plus, Trash2, Image, Check, AlertCircle, Upload, XCircle } from 'lucide-react';
+import { X, Plus, Trash2, Image, Check, AlertCircle, Upload, XCircle, Loader2 } from 'lucide-react';
 import { TARGET_LOCATIONS } from '../../../data/realEstateData';
+import { uploadMultipleImages } from '../../../services/api';
 
 interface AdminPropertyModalProps {
   isOpen: boolean;
@@ -93,6 +94,7 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
   });
 
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
   const [highlightsText, setHighlightsText] = useState('');
   const highlightsRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -105,18 +107,20 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
     }
   }, []);
 
-  const handleImageFiles = (files: FileList | null) => {
-    if (!files) return;
-    Array.from(files).forEach(file => {
-      if (!file.type.startsWith('image/')) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        if (ev.target?.result) {
-          setUploadedImages(prev => [...prev, ev.target!.result as string]);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+  const handleImageFiles = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const imageFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+    if (imageFiles.length === 0) return;
+    setIsUploading(true);
+    try {
+      const urls = await uploadMultipleImages(imageFiles, 'properties');
+      setUploadedImages(prev => [...prev, ...urls]);
+    } catch (err) {
+      console.error('Image upload failed:', err);
+      alert('Image upload failed. Please check your connection and try again.');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleRemoveImage = (idx: number) => {
@@ -498,14 +502,27 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
 
             {/* Drop Zone */}
             <div
-              onClick={() => fileInputRef.current?.click()}
+              onClick={() => !isUploading && fileInputRef.current?.click()}
               onDragOver={e => { e.preventDefault(); }}
               onDrop={e => { e.preventDefault(); handleImageFiles(e.dataTransfer.files); }}
-              className="border-2 border-dashed border-[#E5E9F2] dark:border-[#2A3550] rounded-xl p-4 flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-[#F5822C] hover:bg-orange-50/40 dark:hover:bg-orange-950/10 transition-colors"
+              className={`border-2 border-dashed border-[#E5E9F2] dark:border-[#2A3550] rounded-xl p-4 flex flex-col items-center justify-center gap-2 transition-colors ${
+                isUploading
+                  ? 'opacity-60 cursor-not-allowed'
+                  : 'cursor-pointer hover:border-[#F5822C] hover:bg-orange-50/40 dark:hover:bg-orange-950/10'
+              }`}
             >
-              <Upload className="w-6 h-6 text-[#F5822C]" />
-              <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Click or drag & drop images here</p>
-              <p className="text-[10px] text-slate-400">JPG, PNG, WebP supported • Multiple files allowed</p>
+              {isUploading ? (
+                <>
+                  <Loader2 className="w-6 h-6 text-[#F5822C] animate-spin" />
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Uploading to Cloudinary...</p>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-6 h-6 text-[#F5822C]" />
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Click or drag &amp; drop images here</p>
+                  <p className="text-[10px] text-slate-400">JPG, PNG, WebP supported • Uploaded to Cloudinary</p>
+                </>
+              )}
             </div>
             <input
               ref={fileInputRef}

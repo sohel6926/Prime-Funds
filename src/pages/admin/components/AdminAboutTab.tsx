@@ -19,8 +19,10 @@ import {
   MessageSquare,
   CheckCircle2,
   Upload,
-  XCircle
+  XCircle,
+  Loader2
 } from 'lucide-react';
+import { uploadImage } from '../../../services/api';
 
 interface AdminAboutTabProps {
   onNavigateToStorefront: (page: PageId) => void;
@@ -48,20 +50,25 @@ export const AdminAboutTab: React.FC<AdminAboutTabProps> = ({
   const [activeSection, setActiveSection] = useState<'hero' | 'pillars' | 'mission' | 'advantage' | 'stats'>('hero');
   const advantageImageRef = useRef<HTMLInputElement>(null);
 
-  const handleAdvantageImageFile = useCallback((files: FileList | null) => {
+  const [isUploadingAdvantageImage, setIsUploadingAdvantageImage] = useState(false);
+
+  const handleAdvantageImageFile = useCallback(async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
     if (!file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      if (ev.target?.result) {
-        setFormData((prev: any) => ({
-          ...prev,
-          distinctAdvantage: { ...prev.distinctAdvantage, imageUrl: ev.target!.result as string }
-        }));
-      }
-    };
-    reader.readAsDataURL(file);
+    setIsUploadingAdvantageImage(true);
+    try {
+      const url = await uploadImage(file, 'about');
+      setFormData((prev: any) => ({
+        ...prev,
+        distinctAdvantage: { ...prev.distinctAdvantage, imageUrl: url }
+      }));
+    } catch (err) {
+      console.error('Image upload failed:', err);
+      alert('Image upload failed. Please check your connection and try again.');
+    } finally {
+      setIsUploadingAdvantageImage(false);
+    }
   }, []);
 
   const handleSave = (e?: React.FormEvent) => {
