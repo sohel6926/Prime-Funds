@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Shield, ArrowRight, ShieldCheck } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { useData } from '../context/DataContext';
@@ -8,6 +8,58 @@ interface ApplyModalProps {
   onClose: () => void;
   defaultCategory?: string;
   defaultService?: string;
+}
+
+// Maps any incoming plan title / service name to the exact <select> option value
+function resolveServiceType(name: string): string {
+  const s = name.toLowerCase();
+  // Insurance
+  if (s.includes('term') || s.includes('life insurance') || s.includes('endowment') ||
+      s.includes('ulip') || s.includes('whole life') || s.includes('money back') ||
+      s.includes('child') || s.includes('pension') || s.includes('annuity') ||
+      s.includes('life / term')) return 'Life / Term Insurance';
+  if (s.includes('health') || s.includes('mediclaim') || s.includes('critical illness') ||
+      s.includes('senior citizen health') || s.includes('family floater')) return 'Health Insurance';
+  if (s.includes('vehicle insurance') || s.includes('motor') || s.includes('two wheeler') ||
+      s.includes('general insurance') || s.includes('vehicle / general')) return 'Vehicle / General Insurance';
+  if (s.includes('property insurance') || s.includes('structure insurance') ||
+      s.includes('fire') || s.includes('commercial risk')) return 'Property & Structure Insurance';
+  if (s.includes('insurance') || s.includes('policy') || s.includes('coverage') ||
+      s.includes('pmsby') || s.includes('pmjjby') || s.includes('government scheme') ||
+      s.includes('irdai')) return 'Life / Term Insurance';
+  // Real Estate
+  if (s.includes('real estate') || s.includes('site') || s.includes('plot') && s.includes('purchase') ||
+      s.includes('property purchase') || s.includes('consultation')) return 'Real Estate Property Purchase';
+  if (s.includes('home loan') || s.includes('villa') || s.includes('apartment') ||
+      s.includes('flat') || s.includes('housing loan')) return 'Home Loan';
+  if (s.includes('plot') || s.includes('land') || s.includes('construction loan')) return 'Plot & Land Construction Loan';
+  if (s.includes('commercial property') || s.includes('lrd')) return 'Commercial Property & LRD Loan';
+  if (s.includes('enquiry') || s.includes('inquiry') && s.includes('property')) return 'Real Estate Property Purchase';
+  // Loans
+  if (s.includes('personal loan')) return 'Personal Loan';
+  if (s.includes('business loan')) return 'Business Loan';
+  if (s.includes('mortgage')) return 'Mortgage Loan';
+  if (s.includes('gold loan')) return 'Gold Loan';
+  if (s.includes('vehicle loan') || s.includes('car loan') || s.includes('bike loan') ||
+      s.includes('two-wheeler')) return 'Vehicle Loan';
+  if (s.includes('education') || s.includes('student loan')) return 'Educational Loan';
+  if (s.includes('agriculture') || s.includes('kisan') || s.includes('farm loan')) return 'Agriculture Loan';
+  if (s.includes('secured') || s.includes('unsecured')) return 'Secured & Unsecured Loan';
+  if (s.includes('micro finance') || s.includes('microfinance')) return 'Micro Finance';
+  if (s.includes('balance transfer') || s.includes('lap') || s.includes('loan against property')) return 'Balance Transfer & LAP';
+  if (s.includes('general loan') || s.includes('loan for life')) return 'Personal Loan';
+  // Exact match or fallback
+  const OPTIONS = [
+    'Real Estate Property Purchase', 'Home Loan', 'Plot & Land Construction Loan',
+    'Commercial Property & LRD Loan', 'Personal Loan', 'Business Loan', 'Mortgage Loan',
+    'Gold Loan', 'Vehicle Loan', 'Educational Loan', 'Agriculture Loan',
+    'Secured & Unsecured Loan', 'Micro Finance', 'Balance Transfer & LAP',
+    'Property & Structure Insurance', 'Health Insurance', 'Life / Term Insurance',
+    'Vehicle / General Insurance'
+  ];
+  const exact = OPTIONS.find(o => o.toLowerCase() === s);
+  if (exact) return exact;
+  return 'Personal Loan';
 }
 
 export const ApplyModal: React.FC<ApplyModalProps> = ({
@@ -21,7 +73,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
     fullName: '',
     phone: '',
     email: '',
-    serviceType: defaultService,
+    serviceType: resolveServiceType(defaultService),
     loanAmount: '₹5,00,000',
     employmentType: 'Salaried Professional',
     message: '',
@@ -29,6 +81,14 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
   });
 
   const [submitted, setSubmitted] = useState(false);
+
+  // Re-sync serviceType (and reset form) every time the modal opens with a different service
+  useEffect(() => {
+    if (isOpen) {
+      setFormData(prev => ({ ...prev, serviceType: resolveServiceType(defaultService) }));
+      setSubmitted(false);
+    }
+  }, [isOpen, defaultService]);
 
   if (!isOpen) return null;
 
