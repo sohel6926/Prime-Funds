@@ -236,20 +236,7 @@ function AppContent() {
         defaultService={selectedServiceForApply}
       />
 
-      {/* 5. Floating Admin Quick Access Badge */}
-      <div className="fixed bottom-22 left-6 z-40">
-        <button
-          onClick={() => handleNavigate('admin')}
-          className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#12245C]/90 hover:bg-[#12245C] dark:bg-[#151E32]/90 dark:hover:bg-[#151E32] text-white text-xs font-bold shadow-xl border border-white/20 dark:border-[#2A3550] backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          title="Open Admin Panel (Shortcut: Ctrl + Shift + A)"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#F5822C] animate-pulse"></span>
-          <span>Admin Portal</span>
-          <span className="text-[10px] bg-white/20 px-1.5 py-0.5 rounded font-mono hidden group-hover:inline-block">
-            Ctrl+Shift+A
-          </span>
-        </button>
-      </div>
+
     </div>
   );
 }
