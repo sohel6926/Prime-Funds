@@ -96,7 +96,7 @@ export const AdminContentTab: React.FC<AdminContentTabProps> = ({
         contactPerson: 'Saikiran.V',
         phone: '+91 9177886354',
         rawPhone: '919177886354',
-        email: 'contact@primefundssolutions.com',
+        email: 'primefundssolutions@gmail.com',
         address: 'Prime Towers, Financial District, Gachibowli, Hyderabad, Telangana 500032, India'
       });
       onShowToast('info', 'Branding reset to default.');

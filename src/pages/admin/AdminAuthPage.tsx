@@ -16,7 +16,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
   isDark,
   intendedPath
 }) => {
-  const [username, setUsername] = useState('admin@primefunds.in');
+  const [username, setUsername] = useState('primefundssolutions@gmail.com');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
@@ -30,9 +30,9 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
 
     setTimeout(() => {
       const trimmedKey = password.trim();
-      const validKeys = ['admin123', 'admin', '1234', 'primefunds', 'saikiran'];
+      const validKey = 'Chanti@20';
       
-      if (validKeys.includes(trimmedKey.toLowerCase()) || (username && trimmedKey === 'admin123')) {
+      if (trimmedKey === validKey) {
         if (rememberMe) {
           localStorage.setItem('pfs_admin_auth', 'true');
         }
@@ -41,17 +41,9 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
         onAuthenticated();
       } else {
         setIsSubmitting(false);
-        setError('Invalid Security Key or credentials. Use default key: admin123');
+        setError('Invalid Security Access Key. Please check your credentials.');
       }
     }, 400);
-  };
-
-  const handleOneClickDemo = () => {
-    setUsername('admin@primefunds.in');
-    setPassword('admin123');
-    sessionStorage.setItem('pfs_admin_auth', 'true');
-    localStorage.setItem('pfs_admin_auth', 'true');
-    onAuthenticated();
   };
 
   return (
@@ -114,7 +106,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                 required
                 value={username}
                 onChange={e => setUsername(e.target.value)}
-                placeholder="admin@primefunds.in"
+                placeholder="primefundssolutions@gmail.com"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-slate-50 dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
               />
             </div>
@@ -125,8 +117,8 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-200">
                 Security Access Key
               </label>
-              <span className="text-[10px] text-slate-400">
-                Default: <code className="text-[#F5822C] font-mono font-bold">admin123</code>
+              <span className="text-[10px] text-slate-400 font-medium">
+                Authorized Access
               </span>
             </div>
             <div className="relative">
@@ -142,7 +134,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                   setPassword(e.target.value);
                   if (error) setError('');
                 }}
-                placeholder="Enter access password"
+                placeholder="Enter security access key"
                 className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-slate-50 dark:bg-[#0B1220] text-slate-800 dark:text-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-[#F5822C]"
               />
               <button
@@ -174,7 +166,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
             </div>
           )}
 
-          <div className="pt-2 space-y-2.5">
+          <div className="pt-2">
             <button
               type="submit"
               disabled={isSubmitting}
@@ -182,16 +174,6 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
             >
               <ShieldCheck className="w-4 h-4 text-[#F5822C]" />
               <span>{isSubmitting ? 'Authenticating...' : 'Sign In to Admin Workspace'}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleOneClickDemo}
-              className="w-full py-2.5 rounded-xl border-2 border-dashed border-[#F5822C]/50 hover:border-[#F5822C] bg-[#F5822C]/5 hover:bg-[#F5822C]/10 text-[#F5822C] text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Instant One-Click Login (Demo)</span>
-              <ArrowRight className="w-3 h-3" />
             </button>
           </div>
         </form>

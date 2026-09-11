@@ -140,7 +140,10 @@ export const api = {
       apiFetch<any[]>('/api/settings/why-choose-us', { method: 'PUT', body: JSON.stringify(data) }, true),
     getTrustPoints: () => apiFetch<any[]>('/api/settings/trust-points'),
     updateTrustPoints: (data: any[]) =>
-      apiFetch<any[]>('/api/settings/trust-points', { method: 'PUT', body: JSON.stringify(data) }, true)
+      apiFetch<any[]>('/api/settings/trust-points', { method: 'PUT', body: JSON.stringify(data) }, true),
+    getFees: () => apiFetch<any>('/api/settings/fees'),
+    updateFees: (data: any) =>
+      apiFetch<any>('/api/settings/fees', { method: 'PUT', body: JSON.stringify(data) }, true)
   },
 
   // ─── Content ─────────────────────────────────────────────────────────────

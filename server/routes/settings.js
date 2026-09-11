@@ -192,4 +192,79 @@ router.put('/trust-points', requireAdminKey, async (req, res) => {
   }
 });
 
+// ─── FEE SETTINGS (Professional Fee & Processing Fee) ─────────────────────────
+
+router.get('/fees', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('fee_settings')
+      .select('*')
+      .eq('id', 1)
+      .single();
+
+    if (error || !data) {
+      return res.json({
+        professionalFee: 199,
+        professionalFeeLabel: 'Professional Fee',
+        processingFee: 0,
+        processingFeeLabel: 'Processing Fee',
+        processingFeeType: 'free',
+        processingFeeCustomText: 'FREE',
+        currencySymbol: '₹',
+        isEnabled: true,
+        buttonText: 'Secure Payment & Send Inquiry',
+        note: 'Zero advance charges. 100% transparent consultation.'
+      });
+    }
+    res.json(formatFeesFromDB(data));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.put('/fees', requireAdminKey, async (req, res) => {
+  try {
+    const dbData = {
+      professional_fee: Number(req.body.professionalFee ?? 199),
+      professional_fee_label: req.body.professionalFeeLabel || 'Professional Fee',
+      processing_fee: Number(req.body.processingFee ?? 0),
+      processing_fee_label: req.body.processingFeeLabel || 'Processing Fee',
+      processing_fee_type: req.body.processingFeeType || 'free',
+      processing_fee_custom_text: req.body.processingFeeCustomText || 'FREE',
+      currency_symbol: req.body.currencySymbol || '₹',
+      is_enabled: req.body.isEnabled !== false,
+      button_text: req.body.buttonText || 'Secure Payment & Send Inquiry',
+      note: req.body.note || 'Zero advance charges. 100% transparent consultation.',
+      updated_at: new Date().toISOString()
+    };
+
+    const { data, error } = await supabase
+      .from('fee_settings')
+      .upsert({ id: 1, ...dbData })
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.json(formatFeesFromDB(data));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+function formatFeesFromDB(row) {
+  if (!row) return {};
+  return {
+    professionalFee: Number(row.professional_fee ?? 199),
+    professionalFeeLabel: row.professional_fee_label || 'Professional Fee',
+    processingFee: Number(row.processing_fee ?? 0),
+    processingFeeLabel: row.processing_fee_label || 'Processing Fee',
+    processingFeeType: row.processing_fee_type || 'free',
+    processingFeeCustomText: row.processing_fee_custom_text || 'FREE',
+    currencySymbol: row.currency_symbol || '₹',
+    isEnabled: row.is_enabled !== false,
+    buttonText: row.button_text || 'Secure Payment & Send Inquiry',
+    note: row.note || 'Zero advance charges. 100% transparent consultation.'
+  };
+}
+
 export default router;

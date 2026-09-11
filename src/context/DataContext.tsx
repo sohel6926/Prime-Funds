@@ -13,7 +13,8 @@ import {
   GovSchemeInfo,
   InquiryItem,
   InquiryStatus,
-  AboutPageData
+  AboutPageData,
+  FeeSettings
 } from '../types';
 import { PROPERTY_LISTINGS as DEFAULT_PROPERTIES } from '../data/realEstateData';
 import { LOAN_SERVICES as DEFAULT_LOANS } from '../data/loansData';
@@ -30,7 +31,8 @@ import {
   WHY_CHOOSE_US as DEFAULT_WHY_CHOOSE,
   PRIVACY_POLICY_SECTIONS as DEFAULT_PRIVACY,
   TERMS_CONDITIONS_SECTIONS as DEFAULT_TERMS,
-  DEFAULT_ABOUT_CONTENT
+  DEFAULT_ABOUT_CONTENT,
+  DEFAULT_FEE_SETTINGS
 } from '../data/contentData';
 import { api } from '../services/api';
 
@@ -102,6 +104,11 @@ interface DataContextType {
   termsSections: PolicySection[];
   updateTermsSections: (sections: PolicySection[]) => void;
 
+  // Fee Management (Professional Fee & Processing Fee)
+  feeSettings: FeeSettings;
+  updateFeeSettings: (settings: Partial<FeeSettings>) => void;
+  resetFeeSettings: () => void;
+
   // Instant WhatsApp / Call Enquiry Modal
   instantEnquiryModal: {
     isOpen: boolean;
@@ -155,6 +162,7 @@ const LS_KEYS = {
   PRIVACY: 'pfs_data_privacy_v2',
   TERMS: 'pfs_data_terms_v2',
   INQUIRIES: 'pfs_data_inquiries_v2',
+  FEES: 'pfs_data_fees_v2',
 };
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -174,6 +182,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     contactPerson: DEFAULT_BRAND.contactPerson, phone: DEFAULT_BRAND.phone, rawPhone: DEFAULT_BRAND.rawPhone,
     email: DEFAULT_BRAND.email, address: DEFAULT_BRAND.address
   }));
+  const [feeSettings, setFeeSettings] = useState<FeeSettings>(() => LS.load(LS_KEYS.FEES, DEFAULT_FEE_SETTINGS));
   const [trustPoints, setTrustPoints] = useState<TrustPoint[]>(() => LS.load(LS_KEYS.TRUST, DEFAULT_TRUST_POINTS));
   const [teasers, setTeasers] = useState<QuickTeaser[]>(() => LS.load(LS_KEYS.TEASERS, DEFAULT_TEASERS));
   const [aboutStats, setAboutStats] = useState<AboutStat[]>(() => LS.load(LS_KEYS.STATS, DEFAULT_STATS));
@@ -213,7 +222,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         termsData,
         aboutData,
         govData,
-        inqData
+        inqData,
+        feesData
       ] = await Promise.allSettled([
         api.properties.getAll(),
         api.loans.getAll(),
@@ -226,7 +236,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         api.content.getTerms(),
         api.content.getAbout(),
         api.content.getGovSchemes(),
-        api.inquiries.getAll()
+        api.inquiries.getAll(),
+        api.settings.getFees()
       ]);
 
       if (propsData.status === 'fulfilled' && propsData.value?.length >= 0) {
@@ -243,6 +254,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       if (brandData.status === 'fulfilled' && brandData.value) {
         setRawBrand(brandData.value as RawBrandData);
+      }
+      if (feesData.status === 'fulfilled' && feesData.value) {
+        setFeeSettings(feesData.value as FeeSettings);
+        LS.save(LS_KEYS.FEES, feesData.value);
       }
       if (statsData.status === 'fulfilled' && statsData.value?.length >= 0) {
         setAboutStats(statsData.value);
@@ -286,7 +301,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     whatsappUrl: (text: string) =>
       `https://wa.me/${rawBrand.rawPhone || '919177886354'}?text=${encodeURIComponent(text)}`,
     callUrl: `tel:${rawBrand.rawPhone ? '+' + rawBrand.rawPhone.replace(/\D/g, '') : '+919177886354'}`,
-    emailUrl: `mailto:${rawBrand.email || 'contact@primefundssolutions.com'}`
+    emailUrl: `mailto:${rawBrand.email || 'primefundssolutions@gmail.com'}`
   };
 
   // ─── Property Actions ──────────────────────────────────────────────────────
@@ -558,6 +573,29 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setInstantEnquiryModal(prev => ({ ...prev, isOpen: false }));
   }, []);
 
+  // ─── Fee Management Actions ───────────────────────────────────────────────
+
+  const updateFeeSettings = useCallback((newSettings: Partial<FeeSettings>) => {
+    setFeeSettings(prev => {
+      const updated = { ...prev, ...newSettings };
+      LS.save(LS_KEYS.FEES, updated);
+      if (isBackendOnline) {
+        api.settings.updateFees(updated).catch(err => console.error('updateFees API error:', err));
+      }
+      return updated;
+    });
+    setLastSavedTimestamp(Date.now());
+  }, [isBackendOnline]);
+
+  const resetFeeSettings = useCallback(() => {
+    setFeeSettings(DEFAULT_FEE_SETTINGS);
+    LS.save(LS_KEYS.FEES, DEFAULT_FEE_SETTINGS);
+    if (isBackendOnline) {
+      api.settings.updateFees(DEFAULT_FEE_SETTINGS).catch(err => console.error('resetFees API error:', err));
+    }
+    setLastSavedTimestamp(Date.now());
+  }, [isBackendOnline]);
+
   // ─── Global Management ────────────────────────────────────────────────────
 
   const resetAllToDefaults = useCallback(() => {
@@ -571,6 +609,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       contactPerson: DEFAULT_BRAND.contactPerson, phone: DEFAULT_BRAND.phone, rawPhone: DEFAULT_BRAND.rawPhone,
       email: DEFAULT_BRAND.email, address: DEFAULT_BRAND.address
     });
+    setFeeSettings(DEFAULT_FEE_SETTINGS);
     setTrustPoints(DEFAULT_TRUST_POINTS);
     setTeasers(DEFAULT_TEASERS);
     setAboutStats(DEFAULT_STATS);
@@ -586,12 +625,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       exportedAt: new Date().toISOString(),
       version: '2.0',
       brand: rawBrand,
+      fees: feeSettings,
       properties, loans, lifeInsurances, generalInsurances, govSchemes,
       trustPoints, teasers, aboutStats, aboutContent, whyChooseUs,
       privacySections, termsSections, inquiries
     };
     return JSON.stringify(payload, null, 2);
-  }, [rawBrand, properties, loans, lifeInsurances, generalInsurances, govSchemes, trustPoints, teasers, aboutStats, aboutContent, whyChooseUs, privacySections, termsSections, inquiries]);
+  }, [rawBrand, feeSettings, properties, loans, lifeInsurances, generalInsurances, govSchemes, trustPoints, teasers, aboutStats, aboutContent, whyChooseUs, privacySections, termsSections, inquiries]);
 
   const importAllDataJSON = useCallback((jsonString: string) => {
     try {
@@ -603,6 +643,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (data.generalInsurances && Array.isArray(data.generalInsurances)) setGeneralInsurances(data.generalInsurances);
       if (data.govSchemes && typeof data.govSchemes === 'object') setGovSchemes(data.govSchemes);
       if (data.brand && typeof data.brand === 'object') setRawBrand(data.brand);
+      if (data.fees && typeof data.fees === 'object') {
+        setFeeSettings(data.fees);
+        LS.save(LS_KEYS.FEES, data.fees);
+      }
       if (data.trustPoints && Array.isArray(data.trustPoints)) setTrustPoints(data.trustPoints);
       if (data.teasers && Array.isArray(data.teasers)) setTeasers(data.teasers);
       if (data.aboutStats && Array.isArray(data.aboutStats)) setAboutStats(data.aboutStats);
@@ -626,6 +670,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         lifeInsurances, generalInsurances, govSchemes,
         addInsurance, updateInsurance, deleteInsurance, updateGovSchemes, resetInsurances,
         brandDetails, updateBrandDetails, resetBrandDetails,
+        feeSettings, updateFeeSettings, resetFeeSettings,
         trustPoints, updateTrustPoint, addTrustPoint, deleteTrustPoint,
         teasers, updateTeaser,
         aboutStats, updateAboutStats,

@@ -6,6 +6,7 @@ export type AdminTab =
   | 'properties'
   | 'loans'
   | 'insurances'
+  | 'fees'
   | 'content'
   | 'leads'
   | 'database';
@@ -107,6 +108,13 @@ export function parseLocation(pathname: string): RouteState {
       };
     }
 
+    if (adminSub === 'fees') {
+      return {
+        page: 'admin',
+        adminTab: 'fees'
+      };
+    }
+
     if (adminSub === 'content') {
       const sub = (parts[2] as ContentSubSection) || 'about';
       return {
@@ -189,6 +197,7 @@ export function buildUrl(route: RouteState): string {
       if (route.adminAction === 'add-insurance') return '/admin/insurances/add-new';
       return '/admin/insurances';
     }
+    if (tab === 'fees') return '/admin/fees';
     if (tab === 'content') {
       return `/admin/content/${route.contentSub || 'about'}`;
     }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
 import { useData } from '../context/DataContext';
+import { calculateFeeTotals } from '../utils/feeUtils';
 import { DynamicIcon, WhatsAppIcon, PhoneCallIcon, EmailIcon } from '../components/BrandIcons';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { TypewriterHeading } from '../components/TypewriterHeading';
@@ -26,7 +27,14 @@ interface ContactPageProps {
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
-  const { brandDetails: BRAND_DETAILS, addInquiry, openInstantEnquiry } = useData();
+  const { brandDetails: BRAND_DETAILS, addInquiry, openInstantEnquiry, feeSettings } = useData();
+  const {
+    formattedProFee,
+    procDisplay,
+    isProcFree,
+    formattedTotal,
+    total: totalFee
+  } = calculateFeeTotals(feeSettings);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -41,6 +49,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.phone) {
+      const paymentStatus = totalFee > 0 ? `Paid (${feeSettings?.currencySymbol || '₹'}${totalFee})` : 'Free Consultation';
+
       addInquiry({
         fullName: formData.name,
         phone: formData.phone,
@@ -48,10 +58,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         serviceType: formData.serviceType,
         itemTitle: formData.serviceType,
         itemCategory: 'Financial Service',
-        paymentStatus: 'Paid (₹199)',
+        paymentStatus,
         leadChannel: 'Website Form',
         source: 'Contact Page',
-        message: formData.message || 'Paid online message submitted from Contact Us page.'
+        message: formData.message || `Online inquiry submitted with ${feeSettings?.currencySymbol || '₹'}${totalFee} consultation fee from Contact Us page.`
       });
     }
     setSubmitted(true);
@@ -284,26 +294,46 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   {/* Fee Breakdown Box */}
-                  <div className="bg-white/90 dark:bg-[#0B1220]/90 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#2A3550] space-y-2.5 shadow-sm">
-                    <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
-                      <span>Professional Fee</span>
-                      <span className="font-semibold text-slate-800 dark:text-slate-200">₹199</span>
+                  {feeSettings?.isEnabled ? (
+                    <div className="bg-white/90 dark:bg-[#0B1220]/90 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#2A3550] space-y-2.5 shadow-sm">
+                      <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                        <span>{feeSettings.professionalFeeLabel || 'Professional Fee'}</span>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {formattedProFee}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                        <span>{feeSettings.processingFeeLabel || 'Processing Fee'}</span>
+                        {isProcFree ? (
+                          <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                            {procDisplay}
+                          </span>
+                        ) : (
+                          <span className="font-semibold text-slate-800 dark:text-slate-200">
+                            {procDisplay}
+                          </span>
+                        )}
+                      </div>
+                      <div className="border-t border-slate-200 dark:border-slate-700/60 pt-2.5 flex justify-between items-center">
+                        <span className="text-sm font-bold text-[#12245C] dark:text-white">Total Amount</span>
+                        <span className="text-base sm:text-lg font-extrabold text-[#F5822C]">
+                          {formattedTotal}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
-                      <span>Processing Fee</span>
-                      <span className="font-bold text-emerald-600 dark:text-emerald-400">FREE</span>
+                  ) : (
+                    <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-2xl p-4 border border-emerald-200 dark:border-emerald-900/40 text-center">
+                      <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">
+                        ✨ 100% Free Consultation • Zero Upfront Charges
+                      </span>
                     </div>
-                    <div className="border-t border-slate-200 dark:border-slate-700/60 pt-2.5 flex justify-between items-center">
-                      <span className="text-sm font-bold text-[#12245C] dark:text-white">Total Amount</span>
-                      <span className="text-base sm:text-lg font-extrabold text-[#F5822C]">₹199</span>
-                    </div>
-                  </div>
+                  )}
 
                   <button
                     type="submit"
                     className="w-full py-3.5 px-6 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/25 transition-all flex items-center justify-center gap-2 active:scale-98 cursor-pointer"
                   >
-                    <span>Secure Payment & Send Inquiry</span>
+                    <span>{feeSettings?.buttonText || 'Secure Payment & Send Inquiry'}</span>
                     <ShieldCheck className="w-4 h-4" />
                   </button>
                 </form>

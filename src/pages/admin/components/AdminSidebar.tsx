@@ -9,6 +9,7 @@ import {
   FolderTree,
   Coins,
   ShieldCheck,
+  Receipt,
   FileText,
   FileCode2,
   Sparkles,
@@ -186,6 +187,21 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
               >
                 <ShieldCheck className="w-4 h-4 text-[#3FB6D3]" />
                 <span className="flex-1 text-left">Insurances & Schemes</span>
+              </button>
+
+              <button
+                onClick={() => handleTabClick('fees')}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-semibold transition-all cursor-pointer ${
+                  activeTab === 'fees'
+                    ? 'bg-[#12245C] text-white shadow-md shadow-[#12245C]/20'
+                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#16223B]'
+                }`}
+              >
+                <Receipt className="w-4 h-4 text-emerald-500" />
+                <span className="flex-1 text-left">Professional & Processing Fees</span>
+                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#F5822C]/15 text-[#F5822C]">
+                  Fees
+                </span>
               </button>
             </div>
           </div>

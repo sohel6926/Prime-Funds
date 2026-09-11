@@ -7,11 +7,11 @@ export const BRAND_DETAILS = {
   contactPerson: 'Saikiran.V',
   phone: '+91 9177886354',
   rawPhone: '919177886354',
-  email: 'contact@primefundssolutions.com',
+  email: 'primefundssolutions@gmail.com',
   address: 'Prime Towers, Financial District, Gachibowli, Hyderabad, Telangana 500032, India',
   whatsappUrl: (text: string) => `https://wa.me/919177886354?text=${encodeURIComponent(text)}`,
   callUrl: 'tel:+919177886354',
-  emailUrl: 'mailto:contact@primefundssolutions.com'
+  emailUrl: 'mailto:primefundssolutions@gmail.com'
 };
 
 export const HOME_TRUST_POINTS: TrustPoint[] = [
@@ -145,7 +145,7 @@ export const PRIVACY_POLICY_SECTIONS = [
   },
   {
     title: '10. Contact for Privacy Inquiries',
-    content: 'If you have any questions, grievances, or requests regarding your personal data handling, please contact our Data Representative Saikiran.V at +91 9177886354 or via email at contact@primefundssolutions.com.'
+    content: 'If you have any questions, grievances, or requests regarding your personal data handling, please contact our Data Representative Saikiran.V at +91 9177886354 or via email at primefundssolutions@gmail.com.'
   }
 ];
 
@@ -188,9 +188,22 @@ export const TERMS_CONDITIONS_SECTIONS = [
   },
   {
     title: '10. Contact for Legal Grievances',
-    content: 'For questions, official notices, or legal inquiries concerning these Terms and Conditions, please contact our corporate liaison Saikiran.V at +91 9177886354 or via email at contact@primefundssolutions.com.'
+    content: 'For questions, official notices, or legal inquiries concerning these Terms and Conditions, please contact our corporate liaison Saikiran.V at +91 9177886354 or via email at primefundssolutions@gmail.com.'
   }
 ];
+
+export const DEFAULT_FEE_SETTINGS = {
+  professionalFee: 199,
+  professionalFeeLabel: 'Professional Fee',
+  processingFee: 0,
+  processingFeeLabel: 'Processing Fee',
+  processingFeeType: 'free' as const,
+  processingFeeCustomText: 'FREE',
+  currencySymbol: '₹',
+  isEnabled: true,
+  buttonText: 'Secure Payment & Send Inquiry',
+  note: 'Zero advance charges. 100% transparent consultation.'
+};
 
 export const DEFAULT_ABOUT_CONTENT: AboutPageData = {
   hero: {

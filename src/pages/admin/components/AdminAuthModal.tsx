@@ -23,19 +23,13 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Default PIN: admin123 or 1234
-    if (pin.trim() === 'admin123' || pin.trim() === '1234' || pin.trim() === 'admin') {
+    if (pin.trim() === 'Chanti@20') {
       sessionStorage.setItem('pfs_admin_auth', 'true');
       setError('');
       onAuthenticated();
     } else {
-      setError('Invalid Access Key. Default demo key is: admin123');
+      setError('Invalid Security Access Key. Please try again.');
     }
-  };
-
-  const handleQuickDemo = () => {
-    sessionStorage.setItem('pfs_admin_auth', 'true');
-    onAuthenticated();
   };
 
   return (
@@ -67,7 +61,7 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
             <input
               type={showPin ? 'text' : 'password'}
               autoFocus
-              placeholder="Enter Admin Key (e.g. admin123)"
+              placeholder="Enter Security Access Key"
               value={pin}
               onChange={e => {
                 setPin(e.target.value);
@@ -101,15 +95,6 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
 
             <button
               type="button"
-              onClick={handleQuickDemo}
-              className="w-full py-2.5 rounded-xl border border-[#E5E9F2] dark:border-[#2A3550] bg-slate-100 dark:bg-[#1D2840] hover:bg-slate-200 dark:hover:bg-[#253350] text-[#12245C] dark:text-slate-200 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>Instant One-Click Login (Demo)</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#F5822C]" />
-            </button>
-
-            <button
-              type="button"
               onClick={onCancel}
               className="w-full py-2 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
             >
@@ -120,7 +105,7 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
 
         <div className="mt-6 pt-4 border-t border-[#E5E9F2] dark:border-[#2A3550] text-center">
           <p className="text-[11px] text-slate-400 dark:text-slate-500">
-            Default Master Key: <code className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded font-mono text-[#F5822C]">admin123</code>
+            Prime Funds Solutions Pvt. Ltd. • Authorized Management Console
           </p>
         </div>
       </div>

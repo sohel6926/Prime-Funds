@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS brand_settings (
   contact_person  TEXT DEFAULT 'Saikiran.V',
   phone           TEXT DEFAULT '+91 9177886354',
   raw_phone       TEXT DEFAULT '919177886354',
-  email           TEXT DEFAULT 'contact@primefundssolutions.com',
+  email           TEXT DEFAULT 'primefundssolutions@gmail.com',
   address         TEXT DEFAULT 'Prime Towers, Financial District, Gachibowli, Hyderabad, Telangana 500032, India',
   updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -191,6 +191,24 @@ CREATE TABLE IF NOT EXISTS gov_schemes (
   title       TEXT NOT NULL DEFAULT 'Government Insurance Schemes',
   description TEXT,
   schemes     JSONB NOT NULL DEFAULT '[]'
+);
+
+-- ─────────────────────────────────────────────
+-- 13. FEE SETTINGS (single row, id always = 1)
+-- ─────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS fee_settings (
+  id                         INT PRIMARY KEY DEFAULT 1,
+  professional_fee           NUMERIC NOT NULL DEFAULT 199,
+  professional_fee_label     TEXT DEFAULT 'Professional Fee',
+  processing_fee             NUMERIC NOT NULL DEFAULT 0,
+  processing_fee_label       TEXT DEFAULT 'Processing Fee',
+  processing_fee_type        TEXT DEFAULT 'free',
+  processing_fee_custom_text TEXT DEFAULT 'FREE',
+  currency_symbol            TEXT DEFAULT '₹',
+  is_enabled                 BOOLEAN DEFAULT true,
+  button_text                TEXT DEFAULT 'Secure Payment & Send Inquiry',
+  note                       TEXT DEFAULT 'Zero advance charges. 100% transparent consultation.',
+  updated_at                 TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- ─────────────────────────────────────────────

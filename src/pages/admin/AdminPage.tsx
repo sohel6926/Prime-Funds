@@ -6,6 +6,7 @@ import { AdminDashboardTab } from './components/AdminDashboardTab';
 import { AdminPropertiesTab } from './components/AdminPropertiesTab';
 import { AdminLoansTab } from './components/AdminLoansTab';
 import { AdminInsurancesTab } from './components/AdminInsurancesTab';
+import { AdminFeesTab } from './components/AdminFeesTab';
 import { AdminContentTab } from './components/AdminContentTab';
 import { AdminAboutTab } from './components/AdminAboutTab';
 import { AdminLeadsTab } from './components/AdminLeadsTab';
@@ -103,6 +104,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({
       case 'insurances':
         if (currentRoute.adminAction === 'add-insurance') return 'Insurances / Add New Scheme';
         return 'Financial Products / Insurances & Schemes';
+      case 'fees':
+        return 'Financial Products / Professional & Processing Fees';
       case 'content':
         if (contentSub === 'about') return 'Storefront CMS / About Us Page Editor';
         if (contentSub === 'privacy') return 'Storefront CMS / Privacy Policy';
@@ -234,6 +237,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({
               onShowToast={showToast}
               initialAction={currentRoute.adminAction}
               onClearAction={() => navigateTo('/admin/insurances')}
+            />
+          )}
+
+          {activeTab === 'fees' && (
+            <AdminFeesTab
+              onShowToast={showToast}
+              onNavigateToStorefront={() => onNavigateToStorefront('contact')}
             />
           )}
 

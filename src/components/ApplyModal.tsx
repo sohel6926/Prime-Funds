@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Shield, ArrowRight, ShieldCheck } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { useData } from '../context/DataContext';
+import { calculateFeeTotals } from '../utils/feeUtils';
 
 interface ApplyModalProps {
   isOpen: boolean;
@@ -67,7 +68,14 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
   onClose,
   defaultService = 'Personal Loan'
 }) => {
-  const { brandDetails: BRAND_DETAILS, addInquiry } = useData();
+  const { brandDetails: BRAND_DETAILS, addInquiry, feeSettings } = useData();
+  const {
+    formattedProFee,
+    procDisplay,
+    isProcFree,
+    formattedTotal,
+    total: totalFee
+  } = calculateFeeTotals(feeSettings);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -99,6 +107,8 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
       const isProp = formData.serviceType.toLowerCase().includes('property');
       const itemCategory = isIns ? 'Insurance Plan' : (isProp ? 'Real Estate Property' : 'Loan Product');
 
+      const paymentStatus = totalFee > 0 ? `Paid (${feeSettings?.currencySymbol || '₹'}${totalFee})` : 'Free Consultation';
+
       addInquiry({
         fullName: formData.fullName,
         phone: formData.phone,
@@ -106,12 +116,12 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
         serviceType: formData.serviceType,
         itemTitle: formData.serviceType,
         itemCategory,
-        paymentStatus: 'Paid (₹199)',
+        paymentStatus,
         leadChannel: 'Website Form',
         loanAmount: formData.loanAmount,
         employmentType: formData.employmentType,
         city: formData.city,
-        message: formData.message || `Online application submitted with ₹199 consultation fee for ${formData.serviceType}.`,
+        message: formData.message || `Online application submitted with ${feeSettings?.currencySymbol || '₹'}${totalFee} consultation fee for ${formData.serviceType}.`,
         source: 'Apply Modal'
       });
     }
@@ -305,34 +315,54 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
               </div>
 
               {/* Fee Breakdown Box */}
-              <div className="bg-slate-50 dark:bg-[#0B1220]/80 rounded-2xl p-4 border border-[#E5E9F2] dark:border-[#2A3550] space-y-2.5">
-                <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
-                  <span>Professional Fee</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200">₹199</span>
+              {feeSettings?.isEnabled ? (
+                <div className="bg-slate-50 dark:bg-[#0B1220]/80 rounded-2xl p-4 border border-[#E5E9F2] dark:border-[#2A3550] space-y-2.5">
+                  <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                    <span>{feeSettings.professionalFeeLabel || 'Professional Fee'}</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">
+                      {formattedProFee}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                    <span>{feeSettings.processingFeeLabel || 'Processing Fee'}</span>
+                    {isProcFree ? (
+                      <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                        {procDisplay}
+                      </span>
+                    ) : (
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">
+                        {procDisplay}
+                      </span>
+                    )}
+                  </div>
+                  <div className="border-t border-slate-200 dark:border-slate-700/60 pt-2.5 flex justify-between items-center">
+                    <span className="text-sm font-bold text-[#12245C] dark:text-white">Total Amount</span>
+                    <span className="text-base sm:text-lg font-extrabold text-[#F5822C]">
+                      {formattedTotal}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
-                  <span>Processing Fee</span>
-                  <span className="font-bold text-emerald-600 dark:text-emerald-400">FREE</span>
+              ) : (
+                <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-2xl p-3 border border-emerald-200 dark:border-emerald-900/40 text-center">
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300">
+                    ✨ 100% Free Consultation • Zero Upfront Charges
+                  </span>
                 </div>
-                <div className="border-t border-slate-200 dark:border-slate-700/60 pt-2.5 flex justify-between items-center">
-                  <span className="text-sm font-bold text-[#12245C] dark:text-white">Total Amount</span>
-                  <span className="text-base sm:text-lg font-extrabold text-[#F5822C]">₹199</span>
-                </div>
-              </div>
+              )}
 
               <div className="pt-1">
                 <button
                   type="submit"
                   className="w-full py-3.5 px-6 rounded-xl bg-[#F5822C] hover:bg-[#e0711f] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#F5822C]/25 transition-all flex items-center justify-center gap-2 active:scale-98 cursor-pointer"
                 >
-                  <span>Secure Payment & Send Inquiry</span>
+                  <span>{feeSettings?.buttonText || 'Secure Payment & Send Inquiry'}</span>
                   <ShieldCheck className="w-4 h-4" />
                 </button>
               </div>
 
               <div className="text-center pt-2">
                 <p className="text-[11px] text-[#5B6377] dark:text-[#9BA3B7]">
-                  Your data is protected. By submitting, you agree to receive consultation from Prime Funds Solutions.
+                  {feeSettings?.note || 'Your data is protected. By submitting, you agree to receive consultation from Prime Funds Solutions.'}
                 </p>
               </div>
             </form>

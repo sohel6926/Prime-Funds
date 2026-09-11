@@ -212,8 +212,21 @@ export interface GovSchemeInfo {
 
 export type InquiryStatus = 'New' | 'Contacted' | 'In Progress' | 'Converted' | 'Closed';
 
-export type LeadPaymentStatus = 'Paid (₹199)' | 'No Payment (Redirected)';
+export type LeadPaymentStatus = 'Paid (₹199)' | 'No Payment (Redirected)' | string;
 export type LeadChannel = 'Website Form' | 'WhatsApp' | 'Call' | 'Admin Entry';
+
+export interface FeeSettings {
+  professionalFee: number;
+  professionalFeeLabel: string;
+  processingFee: number;
+  processingFeeLabel: string;
+  processingFeeType: 'free' | 'fixed' | 'percentage';
+  processingFeeCustomText: string;
+  currencySymbol: string;
+  isEnabled: boolean;
+  buttonText: string;
+  note: string;
+}
 
 export interface InquiryItem {
   id: string;

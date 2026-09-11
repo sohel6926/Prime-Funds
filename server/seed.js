@@ -10,7 +10,7 @@ const DEFAULT_BRAND = {
   contact_person: 'Saikiran.V',
   phone: '+91 9177886354',
   raw_phone: '919177886354',
-  email: 'contact@primefundssolutions.com',
+  email: 'primefundssolutions@gmail.com',
   address: 'Prime Towers, Financial District, Gachibowli, Hyderabad, Telangana 500032, India'
 };
 
@@ -49,7 +49,7 @@ const DEFAULT_PRIVACY = [
   { sort_order: 7, title: '7. Cookies & Tracking Technologies', content: 'Our website uses standard essential cookies and analytics tools to enhance site navigation, monitor page responsiveness, and optimize user experience. You can manage your cookie preferences through your individual browser settings.' },
   { sort_order: 8, title: '8. External Third-Party Links', content: 'Our website may contain references or hyperlinks to official partner bank portals and government insurance registries. We encourage you to review their independent privacy terms, as we do not control third-party digital properties.' },
   { sort_order: 9, title: '9. Updates to this Policy', content: 'We periodically update this Privacy Policy to reflect modifications in Indian regulatory guidelines or our internal facilitation practices. Continued use of our website indicates acceptance of the revised privacy framework.' },
-  { sort_order: 10, title: '10. Contact for Privacy Inquiries', content: 'If you have any questions, grievances, or requests regarding your personal data handling, please contact our Data Representative Saikiran.V at +91 9177886354 or via email at contact@primefundssolutions.com.' }
+  { sort_order: 10, title: '10. Contact for Privacy Inquiries', content: 'If you have any questions, grievances, or requests regarding your personal data handling, please contact our Data Representative Saikiran.V at +91 9177886354 or via email at primefundssolutions@gmail.com.' }
 ];
 
 // ─── Default Terms ───────────────────────────────────────────────────────────
@@ -63,7 +63,7 @@ const DEFAULT_TERMS = [
   { sort_order: 7, title: '7. Limitation of Liability', content: 'Prime Funds Solutions Pvt. Ltd. shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from loan rejections by partner banks, processing delays, or changes in lending policies made by third-party financial institutions.' },
   { sort_order: 8, title: '8. Governing Law & Jurisdiction', content: 'These terms and conditions are governed by and construed in accordance with the laws of the Republic of India. Any legal disputes arising out of these terms shall be subject to the exclusive jurisdiction of the courts in Hyderabad, Telangana.' },
   { sort_order: 9, title: '9. Amendments to Terms', content: 'We reserve the right to revise or update these terms at our discretion without prior notice. Your continued utilization of our services after such modifications constitutes your express agreement to the updated terms.' },
-  { sort_order: 10, title: '10. Contact for Legal Grievances', content: 'For questions, official notices, or legal inquiries concerning these Terms and Conditions, please contact our corporate liaison Saikiran.V at +91 9177886354 or via email at contact@primefundssolutions.com.' }
+  { sort_order: 10, title: '10. Contact for Legal Grievances', content: 'For questions, official notices, or legal inquiries concerning these Terms and Conditions, please contact our corporate liaison Saikiran.V at +91 9177886354 or via email at primefundssolutions@gmail.com.' }
 ];
 
 // ─── Default About Content ───────────────────────────────────────────────────
@@ -192,6 +192,27 @@ export async function seedDefaults() {
     const { error } = await supabase.from('gov_schemes').insert(DEFAULT_GOV_SCHEMES);
     if (error) console.error('❌ Gov schemes seed error:', error.message);
     else console.log('✅ Gov schemes seeded');
+  }
+
+  // Fee Settings
+  const { data: feeData } = await supabase.from('fee_settings').select('id').eq('id', 1).single();
+  if (!feeData) {
+    const defaultFees = {
+      id: 1,
+      professional_fee: 199,
+      professional_fee_label: 'Professional Fee',
+      processing_fee: 0,
+      processing_fee_label: 'Processing Fee',
+      processing_fee_type: 'free',
+      processing_fee_custom_text: 'FREE',
+      currency_symbol: '₹',
+      is_enabled: true,
+      button_text: 'Secure Payment & Send Inquiry',
+      note: 'Zero advance charges. 100% transparent consultation.'
+    };
+    const { error } = await supabase.from('fee_settings').insert(defaultFees);
+    if (error) console.error('❌ Fee settings seed error:', error.message);
+    else console.log('✅ Fee settings seeded');
   }
 
   console.log('🌱 Seed check complete.');
