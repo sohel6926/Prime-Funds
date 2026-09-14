@@ -27,7 +27,7 @@ export const FloatingContactFAB: React.FC = () => {
       id: 'fab-whatsapp',
       label: 'WhatsApp Chat',
       sublabel: BRAND_DETAILS.phone,
-      href: BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to inquire about loans and financial services.`),
+      href: BRAND_DETAILS.whatsappUrl(`Hi Prime Funds, I want to inquire about loans and financial services.`),
       bgColor: 'bg-[#25D366] hover:bg-[#20bd5a] text-white',
       icon: <WhatsAppIcon size={20} className="w-5 h-5" />,
       delay: 'delay-[100ms]'

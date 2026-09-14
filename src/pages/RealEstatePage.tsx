@@ -856,7 +856,7 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
                     itemTitle: `Offline Real Estate Inventory (${selectedLocation === 'All' ? 'Telangana' : selectedLocation})`,
                     itemCategory: 'Real Estate Property',
                     channel: 'WhatsApp',
-                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Saikiran, I'm looking for properties in ${selectedLocation === 'All' ? 'Telangana' : selectedLocation} with budget around ${formatPriceLabel(maxPrice)}. Please share unlisted options.`)
+                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Prime Funds, I'm looking for properties in ${selectedLocation === 'All' ? 'Telangana' : selectedLocation} with budget around ${formatPriceLabel(maxPrice)}. Please share unlisted options.`)
                   })}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white text-xs font-bold shadow-lg transition-all cursor-pointer"
                 >
@@ -1155,7 +1155,7 @@ export const RealEstatePage: React.FC<RealEstatePageProps> = ({
                 itemTitle: 'Telangana Real Estate Consultation & Off-Market Deals',
                 itemCategory: 'Real Estate Property',
                 channel: 'WhatsApp',
-                targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to buy a property in Telangana. Please share available options.")
+                targetUrl: BRAND_DETAILS.whatsappUrl("Hi Prime Funds, I want to buy a property in Telangana. Please share available options.")
               })}
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20be5a] text-white font-bold text-sm shadow-xl transition-all active:scale-95 cursor-pointer"
             >

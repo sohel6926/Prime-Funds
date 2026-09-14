@@ -70,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({
             {/* Real Brand-Style Contact Icons */}
             <div className="flex items-center gap-3 pt-2">
               <a
-                href={BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to inquire about your loans and insurance facilitation services.`)}
+                href={BRAND_DETAILS.whatsappUrl(`Hi Prime Funds, I want to inquire about your loans and insurance facilitation services.`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact via WhatsApp"

@@ -89,7 +89,7 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
         keyCoverages: ['Title Defense Legal Cover', 'Boundary Wall Storm Protection']
       }
     ],
-    whatsappMessage: 'Hi Saikiran, I am interested in this property listing. Please share brochure and site visit details.',
+    whatsappMessage: 'Hi Prime Funds, I am interested in this property listing. Please share brochure and site visit details.',
     featured: false
   });
 
@@ -183,7 +183,7 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
             keyCoverages: ['Legal Title Protection', 'Boundary Wall Storm Protection']
           }
         ],
-        whatsappMessage: 'Hi Saikiran, I want to book a site visit for this property listing.',
+        whatsappMessage: 'Hi Prime Funds, I want to book a site visit for this property listing.',
         featured: false
       });
       setUploadedImages([]);
@@ -234,7 +234,7 @@ export const AdminPropertyModal: React.FC<AdminPropertyModalProps> = ({
       quickHighlights: parsedHighlights.length > 0 ? parsedHighlights : ['Clear Title', 'Spot Registration'],
       eligibleLoans: formData.eligibleLoans || [],
       eligibleInsurances: formData.eligibleInsurances || [],
-      whatsappMessage: formData.whatsappMessage || `Hi Saikiran, I want to inquire about ${formData.title}.`,
+      whatsappMessage: formData.whatsappMessage || `Hi Prime Funds, I want to inquire about ${formData.title}.`,
       featured: Boolean(formData.featured)
     };
 

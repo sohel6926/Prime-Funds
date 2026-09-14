@@ -682,7 +682,7 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onNavigate, onOp
               Apply Online
             </button>
             <a
-              href={BRAND_DETAILS.whatsappUrl("Hi Saikiran, I calculated my loan EMI and would like to discuss my application.")}
+              href={BRAND_DETAILS.whatsappUrl("Hi Prime Funds, I calculated my loan EMI and would like to discuss my application.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-md active:scale-95 transition-all"

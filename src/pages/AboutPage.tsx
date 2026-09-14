@@ -297,7 +297,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenApply })
             </div>
             <div className="flex flex-wrap gap-3 relative z-10">
               <a
-                href={BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I would like to consult with Prime Funds Solutions regarding real estate and loan options.`)}
+                href={BRAND_DETAILS.whatsappUrl(`Hi Prime Funds, I would like to consult with Prime Funds Solutions regarding real estate and loan options.`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-md transition-transform active:scale-95"

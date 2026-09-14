@@ -26,7 +26,7 @@ export const AdminInsuranceModal: React.FC<AdminInsuranceModalProps> = ({
     description: '',
     imageUrl: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80',
     iconName: 'Shield',
-    whatsappMessage: 'Hi Saikiran, I want to inquire about this insurance plan.',
+    whatsappMessage: 'Hi Prime Funds, I want to inquire about this insurance plan.',
     features: ['High sum assured', 'Cashless claim support', 'Tax benefits under 80C/80D']
   });
 
@@ -76,7 +76,7 @@ export const AdminInsuranceModal: React.FC<AdminInsuranceModalProps> = ({
         description: 'Protect your financial legacy and assets against unexpected adversities.',
         imageUrl: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80',
         iconName: 'Shield',
-        whatsappMessage: 'Hi Saikiran, I want to know more about this insurance plan.',
+        whatsappMessage: 'Hi Prime Funds, I want to know more about this insurance plan.',
         features: ['Instant policy generation', 'Cashless settlements', 'Tax exemptions']
       });
       setFeaturesText('Instant policy generation\nCashless settlements\nTax exemptions');
@@ -106,7 +106,7 @@ export const AdminInsuranceModal: React.FC<AdminInsuranceModalProps> = ({
       description: formData.description || '',
       imageUrl: uploadedImage || '',
       iconName: formData.iconName || 'Shield',
-      whatsappMessage: formData.whatsappMessage || `Hi Saikiran, I want to inquire about ${formData.title}.`,
+      whatsappMessage: formData.whatsappMessage || `Hi Prime Funds, I want to inquire about ${formData.title}.`,
       features: parsedFeatures.length > 0 ? parsedFeatures : ['Comprehensive coverage']
     };
 

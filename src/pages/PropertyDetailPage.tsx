@@ -68,7 +68,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         message: `Inquired on property detail page for: ${property.title}. Free WhatsApp redirect.`
       });
     }
-    const text = `Hi Saikiran! I'm interested in *${property.title}* (${property.location}). My name is ${formData.name} and my phone number is ${formData.phone}. Please share full details.`;
+    const text = `Hi Prime Funds! I'm interested in *${property.title}* (${property.location}). My name is ${formData.name} and my phone number is ${formData.phone}. Please share full details.`;
     window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
     setSubmitted(true);
   };
@@ -419,7 +419,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   itemTitle: `Site Visit: ${property.title} (${property.location})`,
                   itemCategory: 'Real Estate Property',
                   channel: 'WhatsApp',
-                  targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Saikiran, I want to book a FREE site visit for *${property.title}* in ${property.location}. Please share available dates.`)
+                  targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Prime Funds, I want to book a FREE site visit for *${property.title}* in ${property.location}. Please share available dates.`)
                 })}
                 className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
               >

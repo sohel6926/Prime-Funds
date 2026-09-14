@@ -276,7 +276,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onOpenAp
                     itemTitle: 'Confidential Loan Eligibility Consultation',
                     itemCategory: 'Loan Product',
                     channel: 'WhatsApp',
-                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I need help selecting the best loan for my profile. Please guide me.`)
+                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Prime Funds, I need help selecting the best loan for my profile. Please guide me.`)
                   })}
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-lg transition-transform active:scale-95 cursor-pointer"
                 >

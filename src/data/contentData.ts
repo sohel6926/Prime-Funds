@@ -9,7 +9,10 @@ export const BRAND_DETAILS = {
   rawPhone: '919177886354',
   email: 'primefundssolutions@gmail.com',
   address: 'Prime Towers, Financial District, Gachibowli, Hyderabad, Telangana 500032, India',
-  whatsappUrl: (text: string) => `https://wa.me/919177886354?text=${encodeURIComponent(text)}`,
+  whatsappUrl: (text: string) => {
+    const sanitized = (text || '').replace(/\bHi\s+Saikiran\b/gi, 'Hi Prime Funds');
+    return `https://wa.me/919177886354?text=${encodeURIComponent(sanitized)}`;
+  },
   callUrl: 'tel:+919177886354',
   emailUrl: 'mailto:primefundssolutions@gmail.com'
 };

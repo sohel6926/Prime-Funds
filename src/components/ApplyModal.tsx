@@ -129,7 +129,7 @@ export const ApplyModal: React.FC<ApplyModalProps> = ({
   };
 
   const openWhatsAppDirect = () => {
-    let text = `Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to apply for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.fullName}, Phone: ${formData.phone}`;
+    let text = `Hi Prime Funds, I want to apply for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.fullName}, Phone: ${formData.phone}`;
     if (formData.email) text += `, Email: ${formData.email}`;
     if (formData.employmentType) text += `, Employment: ${formData.employmentType}`;
     if (formData.message) text += `, Message: ${formData.message}`;

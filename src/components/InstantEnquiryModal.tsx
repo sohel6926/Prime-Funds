@@ -88,7 +88,7 @@ export const InstantEnquiryModal: React.FC<InstantEnquiryModalProps> = ({
 
     // 2. Prepare tailored destination URL with user context
     if (isWhatsApp) {
-      let customMsg = `Hi ${brandDetails.contactPerson || 'Saikiran'}, I am inquiring about *${config.itemTitle}* (${config.itemCategory}).\n\nMy Details:\n• Name: ${formData.fullName.trim()}\n• Mobile: ${formData.phone.trim()}\n• Email: ${formData.email.trim()}`;
+      let customMsg = `Hi Prime Funds, I am inquiring about *${config.itemTitle}* (${config.itemCategory}).\n\nMy Details:\n• Name: ${formData.fullName.trim()}\n• Mobile: ${formData.phone.trim()}\n• Email: ${formData.email.trim()}`;
       if (formData.city.trim()) customMsg += `\n• City: ${formData.city.trim()}`;
       
       const whatsappUrl = brandDetails.whatsappUrl(customMsg);

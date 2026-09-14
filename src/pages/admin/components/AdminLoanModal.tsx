@@ -33,7 +33,7 @@ export const AdminLoanModal: React.FC<AdminLoanModalProps> = ({
     tenureText: 'Up to 5 Years',
     imageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80',
     iconName: 'Coins',
-    whatsappMessage: 'Hi Saikiran, I want to apply for this loan.',
+    whatsappMessage: 'Hi Prime Funds, I want to apply for this loan.',
     features: ['Quick approvals within 24 hours', 'Minimal documentation', 'Low interest rate']
   });
 
@@ -85,7 +85,7 @@ export const AdminLoanModal: React.FC<AdminLoanModalProps> = ({
         tenureText: 'Up to 5 Years',
         imageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80',
         iconName: 'Coins',
-        whatsappMessage: 'Hi Saikiran, I want to apply for this loan service.',
+        whatsappMessage: 'Hi Prime Funds, I want to apply for this loan service.',
         features: ['Instant Sanctions', 'Minimal KYC required', 'Zero hidden charges']
       });
       setFeaturesText('Instant Sanctions\nMinimal KYC required\nZero hidden charges');
@@ -117,7 +117,7 @@ export const AdminLoanModal: React.FC<AdminLoanModalProps> = ({
       tenureText: formData.tenureText || 'Up to 5 Years',
       imageUrl: uploadedImage || '',
       iconName: formData.iconName || 'Coins',
-      whatsappMessage: formData.whatsappMessage || `Hi Saikiran, I want to apply for ${formData.title}.`,
+      whatsappMessage: formData.whatsappMessage || `Hi Prime Funds, I want to apply for ${formData.title}.`,
       features: parsedFeatures.length > 0 ? parsedFeatures : ['Low Interest Rate', 'Rapid Disbursement']
     };
 

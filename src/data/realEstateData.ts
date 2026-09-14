@@ -69,7 +69,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Title Defense Legal Cover', 'Boundary Wall Storm Protection']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I'm interested in the KUDA Approved Villa Plots in Karimnagar. Please send me the layout plan and pricing details.",
+    whatsappMessage: "Hi Prime Funds, I'm interested in the KUDA Approved Villa Plots in Karimnagar. Please send me the layout plan and pricing details.",
     featured: true
   },
   {
@@ -123,7 +123,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Fire, Flood & Earthquake', 'Electrical Short Circuit', 'Burglary & Fixture Loss']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I am interested in the 3 BHK Independent House in Karimnagar. Please share house floor plan and photos.",
+    whatsappMessage: "Hi Prime Funds, I am interested in the 3 BHK Independent House in Karimnagar. Please share house floor plan and photos.",
     featured: true
   },
   {
@@ -177,7 +177,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Commercial Fire & Explosion', 'Loss of Rent Cover', 'Public Liability']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want more details on the Commercial Building in Karimnagar Hyderabad Road.",
+    whatsappMessage: "Hi Prime Funds, I want more details on the Commercial Building in Karimnagar Hyderabad Road.",
     featured: true
   },
   {
@@ -230,7 +230,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Equipment Storm Damage', 'Boundary Protection']
       }
     ],
-    whatsappMessage: "Hi Saikiran, please share details for the 4-Acre Agricultural Land in Karimnagar LMD belt.",
+    whatsappMessage: "Hi Prime Funds, please share details for the 4-Acre Agricultural Land in Karimnagar LMD belt.",
     featured: false
   },
 
@@ -288,7 +288,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Boundary Shield', 'Legal Representation']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want details about the DTCP Approved plots in Mancherial NH-363.",
+    whatsappMessage: "Hi Prime Funds, I want details about the DTCP Approved plots in Mancherial NH-363.",
     featured: false
   },
   {
@@ -341,7 +341,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Structural Shell', 'Loss of Rent Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, please share floor plans and price details for the G+1 House in Mancherial.",
+    whatsappMessage: "Hi Prime Funds, please share floor plans and price details for the G+1 House in Mancherial.",
     featured: true
   },
   {
@@ -394,7 +394,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Boundary Shield', 'Third-Party Liability']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the location map and details for the Highway Commercial Plot in Mancherial.",
+    whatsappMessage: "Hi Prime Funds, I want the location map and details for the Highway Commercial Plot in Mancherial.",
     featured: false
   },
   {
@@ -447,7 +447,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Pumpset Breakdown', 'Natural Calamities']
       }
     ],
-    whatsappMessage: "Hi Saikiran, please share details for the 8-Acre Farmland in Mancherial Godavari basin.",
+    whatsappMessage: "Hi Prime Funds, please share details for the 8-Acre Farmland in Mancherial Godavari basin.",
     featured: false
   },
 
@@ -505,7 +505,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Boundary Shield', 'Legal Counsel']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want details about the Residential Plots in Peddapalli Station Road.",
+    whatsappMessage: "Hi Prime Funds, I want details about the Residential Plots in Peddapalli Station Road.",
     featured: false
   },
   {
@@ -558,7 +558,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Fire, Storm & Perils', 'Electrical Damage Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the floor plan and actual photos of the 3 BHK Bungalow in Peddapalli.",
+    whatsappMessage: "Hi Prime Funds, I want the floor plan and actual photos of the 3 BHK Bungalow in Peddapalli.",
     featured: true
   },
   {
@@ -611,7 +611,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Boundary Shield', 'Pump Equipment Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, please share details for the 6-Acre Farmland in Peddapalli Sultanabad belt.",
+    whatsappMessage: "Hi Prime Funds, please share details for the 6-Acre Farmland in Peddapalli Sultanabad belt.",
     featured: false
   },
 
@@ -669,7 +669,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Boundary Shield', 'Legal Defense Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the brochure and pricing for the Residential Plots in Siricilla Vemulawada highway.",
+    whatsappMessage: "Hi Prime Funds, I want the brochure and pricing for the Residential Plots in Siricilla Vemulawada highway.",
     featured: false
   },
   {
@@ -722,7 +722,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Structural Shell', 'Loss of Rent Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want details and site visit for the G+1 House in Siricilla.",
+    whatsappMessage: "Hi Prime Funds, I want details and site visit for the G+1 House in Siricilla.",
     featured: true
   },
   {
@@ -775,7 +775,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Commercial Fire & Shock', 'Loss of Rent']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the details and rental yields for the Commercial Building in Siricilla Main Bazar.",
+    whatsappMessage: "Hi Prime Funds, I want the details and rental yields for the Commercial Building in Siricilla Main Bazar.",
     featured: false
   },
   {
@@ -828,7 +828,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Boundary Shield', 'Agro Equipment Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, please send location map and video of the 5-Acre Farmland near Siricilla Mid-Manair.",
+    whatsappMessage: "Hi Prime Funds, please send location map and video of the 5-Acre Farmland near Siricilla Mid-Manair.",
     featured: false
   },
 
@@ -887,7 +887,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Title Defense', 'Boundary Wall Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the layout plan and price sheet for the Smart City Villa Plots in Siddipet.",
+    whatsappMessage: "Hi Prime Funds, I want the layout plan and price sheet for the Smart City Villa Plots in Siddipet.",
     featured: true
   },
   {
@@ -942,7 +942,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Fire, Flood & Short Circuit', 'Burglary & Fixture Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the floor plan and brochure for 2 & 3 BHK Flats in Siddipet IT Tower corridor.",
+    whatsappMessage: "Hi Prime Funds, I want the floor plan and brochure for 2 & 3 BHK Flats in Siddipet IT Tower corridor.",
     featured: true
   },
   {
@@ -995,7 +995,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Commercial Fire & Storm', 'Loss of Rent', 'Public Liability']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the floor plans and rental yields for the Commercial Building in Siddipet Rajiv Rahadari.",
+    whatsappMessage: "Hi Prime Funds, I want the floor plans and rental yields for the Commercial Building in Siddipet Rajiv Rahadari.",
     featured: false
   },
   {
@@ -1048,7 +1048,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Machinery Breakdown', 'Perimeter Storm Damage']
       }
     ],
-    whatsappMessage: "Hi Saikiran, please share location map and survey numbers for the 10-Acre Land in Siddipet Ranganayaka Sagar belt.",
+    whatsappMessage: "Hi Prime Funds, please share location map and survey numbers for the 10-Acre Land in Siddipet Ranganayaka Sagar belt.",
     featured: false
   },
 
@@ -1107,7 +1107,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Title Defense Legal Cover', 'Boundary Shield']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the layout plan and pricing for the KUDA Approved Plots in Hanamkonda Hunter Road.",
+    whatsappMessage: "Hi Prime Funds, I want the layout plan and pricing for the KUDA Approved Plots in Hanamkonda Hunter Road.",
     featured: true
   },
   {
@@ -1161,7 +1161,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Fire, Flood & Earthquake', 'Burglary & Fixture Loss', 'Short Circuit Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the video walkthrough and floor plan for the 4 BHK Duplex House in Hanamkonda Subedari.",
+    whatsappMessage: "Hi Prime Funds, I want the video walkthrough and floor plan for the 4 BHK Duplex House in Hanamkonda Subedari.",
     featured: true
   },
   {
@@ -1214,7 +1214,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Boundary Shield', 'Third-Party Liability']
       }
     ],
-    whatsappMessage: "Hi Saikiran, I want the commercial plot details on Kazipet - Hanamkonda main road.",
+    whatsappMessage: "Hi Prime Funds, I want the commercial plot details on Kazipet - Hanamkonda main road.",
     featured: false
   },
   {
@@ -1267,7 +1267,7 @@ export const PROPERTY_LISTINGS: PropertyItem[] = [
         keyCoverages: ['Pumpset Breakdown', 'Natural Calamities Cover']
       }
     ],
-    whatsappMessage: "Hi Saikiran, please share details for the 12-Acre Farmland in Hanamkonda Dharmasagar belt.",
+    whatsappMessage: "Hi Prime Funds, please share details for the 12-Acre Farmland in Hanamkonda Dharmasagar belt.",
     featured: false
   }
 ];

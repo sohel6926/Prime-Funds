@@ -87,7 +87,7 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
                     itemTitle: 'Insurance Comparison & Advisory Consultation',
                     itemCategory: 'Insurance Plan',
                     channel: 'WhatsApp',
-                    targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to compare insurance policies for my family.")
+                    targetUrl: BRAND_DETAILS.whatsappUrl("Hi Prime Funds, I want to compare insurance policies for my family.")
                   })}
                   className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-[#12245C] dark:text-[#4FC3E0] hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-xs transition-all flex items-center gap-2 bg-white/60 dark:bg-transparent backdrop-blur-sm cursor-pointer"
                 >
@@ -404,7 +404,7 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
                 itemTitle: 'Government Social Security Schemes (PMSBY / PMJJBY)',
                 itemCategory: 'Insurance Plan',
                 channel: 'WhatsApp',
-                targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to know about enrolling in Government Social Security insurance schemes like PMSBY/PMJJBY.")
+                targetUrl: BRAND_DETAILS.whatsappUrl("Hi Prime Funds, I want to know about enrolling in Government Social Security insurance schemes like PMSBY/PMJJBY.")
               })}
               className="flex-shrink-0 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow transition-all active:scale-95 cursor-pointer"
             >
@@ -438,7 +438,7 @@ export const InsurancesPage: React.FC<InsurancesPageProps> = ({ onNavigate, onOp
                   itemTitle: 'Unbiased Health & Life Insurance Portfolio Comparison',
                   itemCategory: 'Insurance Plan',
                   channel: 'WhatsApp',
-                  targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, please help me compare health and life insurance plans.")
+                  targetUrl: BRAND_DETAILS.whatsappUrl("Hi Prime Funds, please help me compare health and life insurance plans.")
                 })}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-md transition-all active:scale-95 cursor-pointer"
               >

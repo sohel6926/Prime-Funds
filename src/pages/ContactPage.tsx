@@ -68,7 +68,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   };
 
   const openDirectWhatsApp = () => {
-    const text = `Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I submitted a contact message regarding ${formData.serviceType}. My Name: ${formData.name}, Phone: ${formData.phone}, Email: ${formData.email}. Message: ${formData.message || 'Please contact me.'}`;
+    const text = `Hi Prime Funds, I submitted a contact message regarding ${formData.serviceType}. My Name: ${formData.name}, Phone: ${formData.phone}, Email: ${formData.email}. Message: ${formData.message || 'Please contact me.'}`;
     window.open(BRAND_DETAILS.whatsappUrl(text), '_blank');
   };
 
@@ -114,7 +114,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     itemTitle: 'Direct WhatsApp Helpline Inquiry',
                     itemCategory: 'Financial Service',
                     channel: 'WhatsApp',
-                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi ${BRAND_DETAILS.contactPerson || 'Saikiran'}, I want to connect with Prime Funds Solutions regarding loan assistance.`)
+                    targetUrl: BRAND_DETAILS.whatsappUrl(`Hi Prime Funds, I want to connect with Prime Funds Solutions regarding loan assistance.`)
                   })}
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-lg transition-transform active:scale-95 cursor-pointer"
                 >
@@ -418,7 +418,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       itemTitle: 'Direct Discussion on Loan / Property Application',
                       itemCategory: 'Financial Service',
                       channel: 'WhatsApp',
-                      targetUrl: BRAND_DETAILS.whatsappUrl("Hi Saikiran, I want to discuss a new loan application directly.")
+                      targetUrl: BRAND_DETAILS.whatsappUrl("Hi Prime Funds, I want to discuss a new loan application directly.")
                     })}
                     className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition-transform active:scale-95 cursor-pointer"
                   >

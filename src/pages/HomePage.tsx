@@ -63,7 +63,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenApply, onS
   };
 
   const openWhatsAppEnquiry = () => {
-    const text = `Hi ${brandDetails.contactPerson || 'Saikiran'}, I submitted a quick enquiry for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.name}, Phone: ${formData.phone}.`;
+    const text = `Hi Prime Funds, I submitted a quick enquiry for ${formData.serviceType} of amount ${formData.loanAmount}. My Name: ${formData.name}, Phone: ${formData.phone}.`;
     window.open(brandDetails.whatsappUrl(text), '_blank');
   };
 

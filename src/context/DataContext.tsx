@@ -298,8 +298,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const brandDetails: BrandDetails = {
     ...rawBrand,
-    whatsappUrl: (text: string) =>
-      `https://wa.me/${rawBrand.rawPhone || '919177886354'}?text=${encodeURIComponent(text)}`,
+    whatsappUrl: (text: string) => {
+      const sanitized = (text || '').replace(/\bHi\s+Saikiran\b/gi, 'Hi Prime Funds');
+      return `https://wa.me/${rawBrand.rawPhone || '919177886354'}?text=${encodeURIComponent(sanitized)}`;
+    },
     callUrl: `tel:${rawBrand.rawPhone ? '+' + rawBrand.rawPhone.replace(/\D/g, '') : '+919177886354'}`,
     emailUrl: `mailto:${rawBrand.email || 'primefundssolutions@gmail.com'}`
   };
